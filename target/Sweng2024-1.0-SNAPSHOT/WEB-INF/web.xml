@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>registerServlet</servlet-name>
-    <servlet-class>com.example.server.services.RegisterServiceImpl</servlet-class>
+    <servlet-class>com.example.server.RegisterServiceImpl</servlet-class>
   </servlet>
   
    <servlet-mapping>

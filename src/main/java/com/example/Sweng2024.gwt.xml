@@ -20,6 +20,7 @@
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits                                      -->
+  <stylesheet src="/Sweng2024.css" />
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.example.client.Sweng2024'/>

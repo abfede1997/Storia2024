@@ -22,9 +22,11 @@ public class SignUpPage extends Composite {
     private RegisterServiceAsync registerService = GWT.create(RegisterService.class);
 
     public SignUpPage(Sweng2024 app) {
+
         this.hPanel = new HorizontalPanel();
         this.hPanel.addStyleName("signupContainer");
 
+        
         VerticalPanel vPanel1 = new VerticalPanel();
         vPanel1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         vPanel1.addStyleName("signupSection");
@@ -33,11 +35,14 @@ public class SignUpPage extends Composite {
         vPanel2.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         vPanel2.addStyleName("signupSection");
 
-        VerticalPanel vPanel2a = new VerticalPanel();
-        vPanel2a.addStyleName("loginForm");
-        vPanel2a.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 
-        Label titleLabel = new Label("REGISTARTI IN STORIA 2024");
+        
+        VerticalPanel vPanel2a = new VerticalPanel();
+        vPanel2a.addStyleName("signupForm");
+        vPanel2a.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        
+
+        Label titleLabel = new Label("ENTRA IN STORIA 2024");
         titleLabel.addStyleName("signupTitle");
         vPanel2a.add(titleLabel);
 
@@ -55,7 +60,6 @@ public class SignUpPage extends Composite {
         registerButton.addStyleName("registerButton");
         vPanel2a.add(registerButton);
 
-
         registerButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent click) {
                 registerService.registerUser(emailBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
@@ -67,7 +71,7 @@ public class SignUpPage extends Composite {
                     @Override
                     public void onSuccess(Boolean arg0) {
                         //if (arg0) app.goToHomePage();
-                        if (arg0) Window.alert("Registrazione effetutata");
+                        if (arg0) Window.alert("Registrazione effettuata");
                         else Window.alert("Account già esistente");
                     }
                 });

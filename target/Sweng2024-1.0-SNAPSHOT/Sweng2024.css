@@ -1,34 +1,87 @@
 /** Add css rules here for your application. */
+* {
+  box-sizing: border-box;
+}
 
 
-/** Example rules used by the template application (remove for your app) */
-h1 {
+body {
+  height: 100vh;
+}
+
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+}
+
+.signupContainer {
+  height: 100vh;
+  width: 100vw;
+}
+
+.signupSection {
+  width: 50vw;
+  height: 100%;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupForm {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupInput {
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  width: 100%;
+  background: #e6e6e6;
+  color: #333;
+  letter-spacing: 0.5px;
+  padding: 10px 20px;
+  margin: 10px;
+  align-self: center;
+}
+
+/* .loginButton {
+  color: white;
+  padding: 14px 64px;
+  margin: 32px auto;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  background-image: linear-gradient(to right, #8b33c5, #15a0e1);
+  cursor: pointer;
+  transition: opacity 0.4s;
+  align-self: center;
+} */
+
+.registerButton {
+  color: white;
+  padding: 14px 64px;
+  margin: 32px auto;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  background-image: linear-gradient(to right, #8b33c5, #15a0e1);
+  cursor: pointer;
+  transition: opacity 0.4s;
+  align-self: center;
+}
+
+.signupTitle {
+  text-transform: uppercase;
   font-size: 2em;
   font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
   text-align: center;
+  letter-spacing: 1px;
+  align-self: center;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
-}
 
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
-}
 
-.dialogVPanel {
-  margin: 5px;
-}
 
-.serverResponseLabelError {
-  color: red;
-}
 
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
-}
