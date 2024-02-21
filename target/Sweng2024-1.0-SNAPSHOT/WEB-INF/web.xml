@@ -10,10 +10,18 @@
     <servlet-name>registerServlet</servlet-name>
     <servlet-class>com.example.server.RegisterServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.example.server.LoginServiceImpl</servlet-class>
+  </servlet>
   
    <servlet-mapping>
     <servlet-name>registerServlet</servlet-name>
     <url-pattern>/sweng2024/register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/sweng2024/login</url-pattern>
   </servlet-mapping>
 
   
