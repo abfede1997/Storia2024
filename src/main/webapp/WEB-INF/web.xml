@@ -7,14 +7,15 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.example.server.GreetingServiceImpl</servlet-class>
+    <servlet-name>registerServlet</servlet-name>
+    <servlet-class>com.example.server.services.RegisterServiceImpl</servlet-class>
   </servlet>
   
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/sweng2024/greet</url-pattern>
+   <servlet-mapping>
+    <servlet-name>registerServlet</servlet-name>
+    <url-pattern>/sweng2024/register</url-pattern>
   </servlet-mapping>
+
   
   <!-- Default page to serve -->
   <welcome-file-list>
