@@ -1,13 +1,7 @@
-binding: user.agent=gecko1_8
+binding: user.agent=safari
 Compiling module com.example.Sweng2024
-   Unification traversed 580 fields and methods and 168 types. 0 are considered part of the current module and 8 had all of their fields and methods traversed.
-   Compiling 1 permutation
-      Compiling permutation 0...
-      Linking per-type JS with 0 new/changed types.
-      Source Maps Enabled
-   Compile of permutations succeeded
-   Compilation succeeded -- 3,216s
-Linking into C:\Users\39371\Desktop\Storia2024\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\war\sweng2024; Writing extras to C:\Users\39371\Desktop\Storia2024\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\extras\sweng2024
-   Link succeeded
-   Linking succeeded -- 0,738s
-5,282s total -- Compile completed
+   Tracing compile failure path for type 'com.example.client.CercaPage'
+      [ERROR] Errors in 'file:/Users/valentinasant/Storia2024/src/main/java/com/example/client/CercaPage.java'
+         [ERROR] Line 57: No source code is available for type com.example.server.Database; did you forget to inherit a required module?
+   [ERROR] Aborting compile due to errors in some input files
+[ERROR] Compiler returned false

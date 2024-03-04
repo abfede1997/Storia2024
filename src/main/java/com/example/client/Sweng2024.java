@@ -29,6 +29,7 @@ public class Sweng2024 implements EntryPoint {
     Login loginPage = new Login(this);
     RootPanel.get().add(loginPage);
   }
+  
   private void handleHistoryChange(String historyToken) {
     if ("home".equals(historyToken)) {
       showHomePage();
@@ -38,6 +39,8 @@ public class Sweng2024 implements EntryPoint {
       showScriviPage();
     } else if ("pagaPage".equals(historyToken)) {
       showPagaPage();
+    } else if ("cercaPage".equals(historyToken)) {
+      showCercaPage();
     } else {
       showSignUpPage();
     }
@@ -56,5 +59,10 @@ public class Sweng2024 implements EntryPoint {
     RootPanel.get().clear();
     ScriviPage scriviPage = new ScriviPage(); // Assumi che tu abbia una classe ScriviPage
     RootPanel.get().add(scriviPage);
+  }
+  private void showCercaPage() {
+    RootPanel.get().clear();
+    CercaPage cercaPage = new CercaPage(); // Assumi che tu abbia una classe CercaPage
+    RootPanel.get().add(cercaPage);
   }
 }

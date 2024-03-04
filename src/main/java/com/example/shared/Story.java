@@ -11,12 +11,13 @@ public class Story implements Serializable, Comparable<Story> {
     private String nome;
     private String descrizione;
     private Scenario inizio;
-    private List<String> inventario;
+
+    /*private List<String> inventario;*/
     public Story(final String nome, final String descrizione, final Scenario inizio) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.inizio = inizio;
-        this.inventario = new ArrayList<>();
+        //this.inventario = new ArrayList<>();
     }
 
     public Story() {
@@ -24,21 +25,23 @@ public class Story implements Serializable, Comparable<Story> {
 
 
 
-    public List<String> getInventario() {
+    /*public List<String> getInventario() {
         return inventario;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Story story = (Story) o;
-        return Objects.equals(nome, story.nome) && Objects.equals(descrizione, story.descrizione) && Objects.equals(inizio, story.inizio) && Objects.equals(inventario, story.inventario);
+        //abbiamo tolto inventario
+        return Objects.equals(nome, story.nome) && Objects.equals(descrizione, story.descrizione) && Objects.equals(inizio, story.inizio) ;
     }
 
+    //abbiamo tolto inventario dentro a parametri
     @Override
     public int hashCode() {
-        return Objects.hash(nome, descrizione, inizio, inventario);
+        return Objects.hash(nome, descrizione, inizio );
     }
 
     public String getNome() {
@@ -50,6 +53,7 @@ public class Story implements Serializable, Comparable<Story> {
     public Scenario getInizio() {
         return inizio;
     }
+
 
     @Override
     public int compareTo(@NotNull Story o) {
