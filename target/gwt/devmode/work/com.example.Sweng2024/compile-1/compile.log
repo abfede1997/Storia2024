@@ -1,4 +1,1 @@
-Tracing compile failure path for type 'com.example.client.CercaPage'
-   [ERROR] Errors in 'file:/Users/valentinasant/Storia2024/src/main/java/com/example/client/CercaPage.java'
-      [ERROR] Line 57: No source code is available for type com.example.server.Database; did you forget to inherit a required module?
-Module setup completed in 38749 ms
+Module setup completed in 35218 ms

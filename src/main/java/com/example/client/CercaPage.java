@@ -2,8 +2,12 @@ package com.example.client;
 
 import java.util.NavigableSet;
 
+import javax.swing.JOptionPane;
+
 import com.example.server.Database;
 import com.example.shared.Story;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -30,6 +34,15 @@ public class CercaPage extends Composite {
         final TextBox searchBox = new TextBox();
         Button searchButton = new Button("Cerca");
         searchButton.addStyleName("searchButton");
+
+        // Aggiungi il click handler al bottone di ricerca
+        searchButton.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                //populateResultsTable();
+            }
+        });
+
         searchPanel.add(searchBox);
         searchPanel.add(searchButton);
         mainPanel.add(searchPanel);
@@ -40,11 +53,30 @@ public class CercaPage extends Composite {
         // Aggiungi stili CSS
         mainPanel.setStyleName("mainPanel");
         resultsTable.setStyleName("resultsTable");
- 
+
+
         // Simulazione di risultati di ricerca
-        simulateSearchResults();
+        //simulateSearchResults();
     }
  
+    // Metodo per popolare la tabella dei risultati con tutte le storie dal server
+    /*private void populateResultsTable() {
+        // Rimuovi eventuali risultati precedenti
+        resultsTable.removeAllRows();
+
+        // Ottieni tutte le storie dal server
+        NavigableSet<Story> storySet = Database.getInstance().getStorySet();
+
+        // Popola la tabella dei risultati con le storie ottenute
+        int row = 0;
+        for (Story story : storySet) {
+            resultsTable.setText(row, 0, story.getNome());
+            resultsTable.setText(row, 1, story.getDescrizione());
+            // Aggiungi altre colonne se necessario
+            row++;
+        }
+    }*/
+
     private void simulateSearchResults() {
         // Simulazione di risultati di ricerca
         resultsTable.setText(0, 0, "Titolo");
@@ -56,9 +88,9 @@ public class CercaPage extends Composite {
         // Aggiungi stili alle righe dei risultati
         resultsTable.getRowFormatter().setStyleName(0, "resultsTableHeader");
         for (int i = 1; i <= 10; i++) {
-            resultsTable.setText(i, 0," Titolo ");
-            resultsTable.setText(i, 1, "Autore " );
-            resultsTable.setText(i, 2, "Genere " );
+            resultsTable.setText(i, 0," Titolo " + i);
+            resultsTable.setText(i, 1, "Autore " + i);
+            resultsTable.setText(i, 2, "Genere " + i);
             resultsTable.getRowFormatter().setStyleName(i, "resultsTableRow");
         }
     }
