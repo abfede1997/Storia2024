@@ -6,8 +6,6 @@ import com.google.gwt.user.client.History;
 //import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class HomePage extends Composite {
@@ -16,20 +14,6 @@ public class HomePage extends Composite {
 
     public HomePage() {
         this.vPanel.addStyleName("wrapper");
-
-        HorizontalPanel menu = new HorizontalPanel();
-        menu.addStyleName("homeMenu");
-
-        Label homeLabel = new Label("Home");
-        homeLabel.addStyleName("homeMenuLabel");
-
-        Label userLabel = new Label("Area utente");
-        userLabel.addStyleName("homeMenuLabel");
-
-        menu.add(homeLabel);
-        menu.add(userLabel);
-
-        this.vPanel.add(menu);
 
         Button scriviButton = new Button("Scrivi Storia");
         scriviButton.addStyleName("homeButton");

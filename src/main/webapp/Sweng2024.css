@@ -8,11 +8,6 @@ body {
 
 }
 
-.wrapper {
-  height: 100vh;
-  width: 100vw;
-}
-
 
 /*Registrazione*/
 
@@ -129,3 +124,23 @@ body {
 }
 
 /*HomePage*/
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.homeButton {
+  margin-top: 10vh;  
+  color: black;
+  padding: 14px 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  background-color:#8b33c5;
+  cursor: pointer;
+  align-self: center;
+  width: 300px;
+}

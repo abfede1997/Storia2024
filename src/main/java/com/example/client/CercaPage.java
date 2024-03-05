@@ -1,11 +1,5 @@
 package com.example.client;
 
-import java.util.NavigableSet;
-
-import javax.swing.JOptionPane;
-
-import com.example.server.Database;
-import com.example.shared.Story;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -77,22 +71,6 @@ public class CercaPage extends Composite {
         }
     }*/
 
-    private void simulateSearchResults() {
-        // Simulazione di risultati di ricerca
-        resultsTable.setText(0, 0, "Titolo");
-        resultsTable.setText(0, 1, "Autore");
-        resultsTable.setText(0, 2, "Categoria");
-        resultsTable.setText(0, 3, "Lunghezza");
-        
- 
-        // Aggiungi stili alle righe dei risultati
-        resultsTable.getRowFormatter().setStyleName(0, "resultsTableHeader");
-        for (int i = 1; i <= 10; i++) {
-            resultsTable.setText(i, 0," Titolo " + i);
-            resultsTable.setText(i, 1, "Autore " + i);
-            resultsTable.setText(i, 2, "Genere " + i);
-            resultsTable.getRowFormatter().setStyleName(i, "resultsTableRow");
-        }
-    }
+   
 }
 

@@ -3,8 +3,6 @@ package com.example.shared;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Story implements Serializable, Comparable<Story> {
@@ -22,12 +20,6 @@ public class Story implements Serializable, Comparable<Story> {
 
     public Story() {
     }
-
-
-
-    /*public List<String> getInventario() {
-        return inventario;
-    }*/
 
     @Override
     public boolean equals(Object o) {
