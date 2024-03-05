@@ -34,10 +34,10 @@ public class Login extends Composite {
         titleLabel.addStyleName("loginTitle");
         vPanel2a.add(titleLabel);
 
-        TextBox emailBox = new TextBox();
-        emailBox.getElement().setPropertyString("placeholder", "Email");
-        emailBox.addStyleName("loginInput");
-        vPanel2a.add(emailBox);
+        TextBox usernameBox = new TextBox();
+        usernameBox.getElement().setPropertyString("placeholder", "Username");
+        usernameBox.addStyleName("loginInput");
+        vPanel2a.add(usernameBox);
 
         PasswordTextBox passwordBox = new PasswordTextBox();
         passwordBox.addStyleName("loginInput");
@@ -61,7 +61,7 @@ public class Login extends Composite {
 
         loginButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent click) {
-                loginService.login(emailBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
+                loginService.login(usernameBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable arg0) {
                         Window.alert("error");

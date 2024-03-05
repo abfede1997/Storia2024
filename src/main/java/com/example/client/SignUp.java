@@ -47,10 +47,10 @@ public class SignUp extends Composite {
         titleLabel.addStyleName("signupTitle");
         vPanel2a.add(titleLabel);
 
-        TextBox emailBox = new TextBox();
-        emailBox.getElement().setPropertyString("placeholder", "Email");
-        emailBox.addStyleName("signupInput");
-        vPanel2a.add(emailBox);
+        TextBox usernameBox = new TextBox();
+        usernameBox.getElement().setPropertyString("placeholder", "Username");
+        usernameBox.addStyleName("signupInput");
+        vPanel2a.add(usernameBox);
 
         PasswordTextBox passwordBox = new PasswordTextBox();
         passwordBox.addStyleName("signupInput");
@@ -74,7 +74,7 @@ public class SignUp extends Composite {
 
         registerButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent click) {
-                registerService.registerUser(emailBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
+                registerService.registerUser(usernameBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable arg0) {
                         Window.alert("error");

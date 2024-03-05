@@ -5,6 +5,7 @@
 
 body {
   height: 100vh;
+  background-color:rgb(87, 201, 199);
 
 }
 
@@ -18,9 +19,7 @@ body {
 }
 
 .signupSection {
-  width: 50vw;
-  height: 100%;
-
+  margin-top:30px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -106,9 +105,7 @@ body {
 }
 
 .loginSection {
-  width: 50vw;
-  height: 100%;
-
+  margin-top:30px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -131,6 +128,9 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  background-image: url("sfondo1.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .homeButton {
   margin-top: 10vh;  
@@ -143,4 +143,35 @@ body {
   cursor: pointer;
   align-self: center;
   width: 300px;
+}
+
+/*PagaPage*/
+.payArea {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("pay.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.paymentData{
+  margin: 20px;
+  padding: 30px;
+}
+.payTitle {
+  text-transform: uppercase;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.payButton {
+  color: black;
+  padding: 14px 64px;
+  margin-top: 32px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  background-color: lightsalmon;
+  cursor: pointer;
+  align-self: center;
 }

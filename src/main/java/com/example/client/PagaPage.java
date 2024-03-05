@@ -16,22 +16,40 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.json.client.JSONObject;
  
-public class PagaPage extends Composite {
- 
+public class PagaPage extends Composite { 
+
+    private VerticalPanel vhPanel = new VerticalPanel();
     private VerticalPanel vPanel = new VerticalPanel();
  
     public PagaPage() {
         Label titolo = new Label("Effettua il pagamento per poter giocare.");
+        titolo.addStyleName("payTitle");
         // Creazione di 5 campi di testo per inserire i valori
+        Label amount = new Label("Amount:");
+        amount.addStyleName("write");
         TextBox amount1TextBox = new TextBox();
+        amount1TextBox.addStyleName("box");
+        Label holder = new Label("Card Holder:");
+        holder.addStyleName("write");
         TextBox amount2TextBox = new TextBox();
+        amount2TextBox.addStyleName("box");
+        Label number = new Label("Card Number:");
+        number.addStyleName("write");
         TextBox amount3TextBox = new TextBox();
+        amount3TextBox.addStyleName("box");
+        Label date = new Label("Expire Date:");
+        date.addStyleName("write");
         TextBox amount4TextBox = new TextBox();
+        amount4TextBox.addStyleName("box");
+        Label cvv = new Label("CVV:");
+        cvv.addStyleName("write");
         TextBox amount5TextBox = new TextBox();
+        amount5TextBox.addStyleName("box");
 
 
         // Creazione di un pulsante per inviare la richiesta POST
         Button sendButton = new Button("Invia");
+        sendButton.addStyleName("payButton");
 
         // Aggiunta di un gestore di eventi per il click del pulsante
         sendButton.addClickHandler(new ClickHandler() {
@@ -76,19 +94,27 @@ public class PagaPage extends Composite {
             }
         });
 
-        vPanel.add(titolo);
-        vPanel.add(new Label("Amount:"));
+        vPanel.addStyleName("paymentData");
+        vhPanel.addStyleName("payArea");
+
+        vPanel.add(amount);
         vPanel.add(amount1TextBox);
-        vPanel.add(new Label("Card Holder:"));
+        vPanel.add(holder);
         vPanel.add(amount2TextBox);
-        vPanel.add(new Label("Card Number:"));
+        vPanel.add(number);
         vPanel.add(amount3TextBox);
-        vPanel.add(new Label("Expire Date:"));
+        vPanel.add(date);
         vPanel.add(amount4TextBox);
-        vPanel.add(new Label("CVV:"));
+        vPanel.add(cvv);
         vPanel.add(amount5TextBox);
         vPanel.add(sendButton);
+        vhPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        vhPanel.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
 
-        initWidget(this.vPanel);
+        this.vhPanel.add(titolo);
+        this.vhPanel.add(vPanel);
+        
+
+        initWidget(this.vhPanel);
     }
 }

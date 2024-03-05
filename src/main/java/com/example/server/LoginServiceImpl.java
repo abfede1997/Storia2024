@@ -7,7 +7,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     private UserD userD = new UserDImpl();
 
     @Override
-    public boolean login(String email, String password) {
-        return this.userD.getUser(email,password)!=null;
+    public boolean login(String username, String password) {
+        return this.userD.getUser(username,password)!=null;
     }
 }

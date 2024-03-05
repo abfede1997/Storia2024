@@ -37,9 +37,9 @@ public class Database {
         return fileDB.treeSet("story", Story.class).createOrOpen();
     }
 
-    public User checkLogin(String email, String password) {
+    public User checkLogin(String username, String password) {
         NavigableSet<User> userSet = fileDB.treeSet("users", User.class).createOrOpen();
-        User newUser = new User(email, password);
+        User newUser = new User(username, password);
         boolean tmp = userSet.contains(newUser);
         fileDB.close();
         fileDB = null;
@@ -50,7 +50,7 @@ public class Database {
     public boolean addUser(User newUser) {
         NavigableSet<User> userSet = fileDB.treeSet("users", User.class).createOrOpen();
         for (User u : userSet) {
-            if (u.getEmail().equals(newUser.getEmail())) {
+            if (u.getUsername().equals(newUser.getUsername())) {
                 fileDB.close();
                 fileDB = null;
                 return false;
