@@ -1,9 +1,7 @@
-package com.example.sweng.server.services;
+package com.example.server;
 
-import com.example.sweng.client.services.getStories.GetStoriesService;
-import com.example.sweng.server.database.d.StoryD;
-import com.example.sweng.server.database.d.StoryDImpl;
-import com.example.sweng.shared.storia.Story;
+import com.example.client.services.GetStoriesService;
+import com.example.shared.Story;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import java.util.List;

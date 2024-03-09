@@ -1,9 +1,9 @@
-package com.example.sweng.client;
+package com.example.client;
 
-import com.example.sweng.client.services.getStories.GetStoriesService;
-import com.example.sweng.client.services.getStories.GetStoriesServiceAsync;
-import com.example.sweng.shared.storia.Story;
-import com.example.sweng.shared.storia.scenario.Scenario;
+import com.example.client.services.GetStoriesService;
+import com.example.client.services.GetStoriesServiceAsync;
+import com.example.shared.Story;
+import com.example.shared.Scenario;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

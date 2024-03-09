@@ -41,6 +41,8 @@ public class Sweng2024 implements EntryPoint {
       showPagaPage();
     } else if ("cercaPage".equals(historyToken)) {
       showCercaPage();
+    } else if ("giocaPage".equals(historyToken)) {
+      showGiocaPage();
     } else {
       showSignUpPage();
     }
@@ -64,5 +66,10 @@ public class Sweng2024 implements EntryPoint {
     RootPanel.get().clear();
     CercaPage cercaPage = new CercaPage(); // Assumi che tu abbia una classe CercaPage
     RootPanel.get().add(cercaPage);
+  }
+  private void showGiocaPage() {
+    RootPanel.get().clear();
+    GiocaPage giocaPage = new GiocaPage();
+    RootPanel.get().add(giocaPage);
   }
 }

@@ -14,6 +14,14 @@
     <servlet-name>loginServlet</servlet-name>
     <servlet-class>com.example.server.LoginServiceImpl</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>addStoryServlet</servlet-name>
+    <servlet-class>com.example.server.AddStoryServiceImpl</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>getStoriesServlet</servlet-name>
+    <servlet-class>com.example.server.GetStoriesServiceImpl</servlet-class>
+  </servlet>
   
    <servlet-mapping>
     <servlet-name>registerServlet</servlet-name>
@@ -22,6 +30,14 @@
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
     <url-pattern>/sweng2024/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addStoryServlet</servlet-name>
+    <url-pattern>/sweng2024/addStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>getStoriesServlet</servlet-name>
+    <url-pattern>/sweng2024/getStories</url-pattern>
   </servlet-mapping>
 
   

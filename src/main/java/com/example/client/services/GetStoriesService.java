@@ -1,6 +1,6 @@
-package com.example.sweng.client.services.getStories;
+package com.example.client.services;
 
-import com.example.sweng.shared.storia.Story;
+import com.example.shared.Story;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
