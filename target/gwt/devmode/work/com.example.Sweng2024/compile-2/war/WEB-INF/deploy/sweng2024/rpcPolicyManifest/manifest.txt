@@ -2,5 +2,6 @@
 # RPC service class, partial path of RPC policy file
 com.example.client.services.LoginService, E62FBC8B4C81A76ADEAF9F345CA68BCA.gwt.rpc
 com.example.client.services.AddStoryService, 20FF0E70C04781313249047D44C6915D.gwt.rpc
+com.example.client.services.RegisterService, CD96731BDE76373BD4F2FAECDE1DB7D0.gwt.rpc
 com.example.client.services.GetStoriesService, 8649502BA4A6693A0889E007B52C297D.gwt.rpc
 com.example.client.services.RegisterService, 3059C714084A0C5F17917CDBAD5972D1.gwt.rpc
