@@ -2,8 +2,8 @@ package com.example.client;
 
 import com.example.client.services.GetStoriesService;
 import com.example.client.services.GetStoriesServiceAsync;
-import com.example.shared.Story;
 import com.example.shared.Scenario;
+import com.example.shared.Story;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -21,6 +21,7 @@ public class GiocaPage extends Composite {
     private List<Story> playStories;
     private Story chosenStory;
     private Scenario currentScenario;
+    private List<String> oggettiRaccolti;
 
     private VerticalPanel vPanel = new VerticalPanel();
     private VerticalPanel mainStoryPanel = new VerticalPanel();
@@ -31,11 +32,17 @@ public class GiocaPage extends Composite {
     public GiocaPage() {
         initWidget(this.vPanel);
 
+        this.oggettiRaccolti = new ArrayList<>();
+
         Label storyName = new Label();
         Label storyDescription = new Label();
+        Label storyCategory = new Label();
+        Label storyAuthor = new Label();
 
         mainStoryPanel.add(storyName);
         mainStoryPanel.add(storyDescription);
+        mainStoryPanel.add(storyCategory);
+        mainStoryPanel.add(storyAuthor);
 
         Label scenarioDescription = new Label();
         descriptionPanel.add(scenarioDescription);
@@ -86,9 +93,13 @@ public class GiocaPage extends Composite {
 
                     actions.clear();
                     buttonsPanel.clear();
+                    oggettiRaccolti.clear();
+                    chosenStory.getInventario().clear();
 
                     storyName.setText(chosenStory.getNome());
                     storyDescription.setText(chosenStory.getDescrizione());
+                    storyCategory.setText(chosenStory.getCategoria());
+                    storyAuthor.setText(chosenStory.getAutore());
 
                     currentScenario = chosenStory.getInizio();
 
@@ -109,26 +120,73 @@ public class GiocaPage extends Composite {
     private void constructCurrentScenario(Scenario currentScenario, Label scenarioDescription, List<Button> actions) {
         scenarioDescription.setText(currentScenario.getDescrizione());
 
-        currentScenario.getProseguimento().forEach((id, scenario) -> {
-            Button tmp = new Button(scenario.getAzione());
+        if(currentScenario.getIndovinello().isEmpty()) {
 
-            tmp.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent clickEvent) {
-                    if(!scenario.getProseguimento().isEmpty()) {
+            if (!currentScenario.getRaccogliOggetto().isEmpty() && !oggettiRaccolti.contains(currentScenario.getRaccogliOggetto())) {
+                Button tmp = new Button("Raccogli " + currentScenario.getRaccogliOggetto());
+                tmp.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent clickEvent) {
+                        chosenStory.getInventario().add(currentScenario.getRaccogliOggetto());
+                        oggettiRaccolti.add(currentScenario.getRaccogliOggetto());
+
                         actions.clear();
                         buttonsPanel.clear();
-
-                        constructCurrentScenario(scenario, scenarioDescription, actions);
+                        constructCurrentScenario(currentScenario, scenarioDescription, actions);
                     }
+                });
+                actions.add(tmp);
+            }
+
+            currentScenario.getProseguimento().forEach((id, scenario) -> {
+                Button tmp;
+
+                if (!scenario.getUsaOggetto().isEmpty() && chosenStory.getInventario().contains(scenario.getUsaOggetto())) {
+                    tmp = new Button("Usa " + scenario.getUsaOggetto());
+                    tmp.addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent clickEvent) {
+                            actions.clear();
+                            buttonsPanel.clear();
+                            chosenStory.getInventario().remove(scenario.getUsaOggetto());
+                            constructCurrentScenario(scenario, scenarioDescription, actions);
+                        }
+                    });
+                    actions.add(tmp);
+                } else if (scenario.getUsaOggetto().isEmpty()) {
+                    tmp = new Button(scenario.getAzione());
+                    tmp.addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent clickEvent) {
+                            actions.clear();
+                            buttonsPanel.clear();
+                            constructCurrentScenario(scenario, scenarioDescription, actions);
+                        }
+                    });
+                    actions.add(tmp);
                 }
             });
 
-            actions.add(tmp);
-        });
+            actions.forEach(button -> {
+                buttonsPanel.add(button);
+            });
+        } else {
+            TextBox answer = new TextBox();
+            Button submitAnswer = new Button("Rispondi");
 
-        actions.forEach(button -> {
-            buttonsPanel.add(button);
-        });
+            buttonsPanel.add(answer);
+            buttonsPanel.add(submitAnswer);
+
+            submitAnswer.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent clickEvent) {
+                    if(!answer.getText().isEmpty() && answer.getText().equals(currentScenario.getIndovinello())){
+                        actions.clear();
+                        buttonsPanel.clear();
+                        constructCurrentScenario(currentScenario.getProseguimento().entrySet().stream().findFirst().get().getValue(), scenarioDescription, actions);
+                    }
+                }
+            });
+        }
     }
 }

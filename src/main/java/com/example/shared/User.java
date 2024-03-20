@@ -13,6 +13,9 @@ public class User implements Serializable, Comparable<User> {
         this.password = password;
     }
 
+    public User() {
+    }
+
     public String getUsername() {
         return this.username;
     }

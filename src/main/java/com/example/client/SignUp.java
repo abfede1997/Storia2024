@@ -2,20 +2,13 @@ package com.example.client;
 
 import com.example.client.services.RegisterService;
 import com.example.client.services.RegisterServiceAsync;
+import com.example.shared.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 
 public class SignUp extends Composite {
     
@@ -74,16 +67,24 @@ public class SignUp extends Composite {
 
         registerButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent click) {
-                registerService.registerUser(usernameBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
+                registerService.setUserLogged(new User(usernameBox.getText(), passwordBox.getText()), new AsyncCallback<Boolean>() {
                     @Override
-                    public void onFailure(Throwable arg0) {
-                        Window.alert("error");
-                    }
+                    public void onFailure(Throwable throwable) { Window.alert("error saving user logged"); }
 
                     @Override
-                    public void onSuccess(Boolean arg0) {
-                        if (arg0) app.goToHomePage();
-                        else Window.alert("Account già esistente");
+                    public void onSuccess(Boolean aBoolean) {
+                        registerService.registerUser(usernameBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable arg0) {
+                                Window.alert("error logging in");
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean arg0) {
+                                if (arg0) app.goToHomePage();
+                                else Window.alert("Account già esistente");
+                            }
+                        });
                     }
                 });
             }

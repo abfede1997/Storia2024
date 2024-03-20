@@ -1,14 +1,13 @@
-binding: user.agent=gecko1_8
+binding: user.agent=safari
 Compiling module com.example.Sweng2024
-   Unification traversed 1530 fields and methods and 914 types. 58 are considered part of the current module and 68 had all of their fields and methods traversed.
-   [WARN] Some stale types ([com.example.client.services.RegistrationResult_FieldSerializer, com.example.client.services.RegistrationResult$Map, com.example.client.services.RegistrationResult]) were not reprocessed as was expected. This is either a compiler bug or a Generator has legitimately stopped creating these types.
+   Unification traversed 580 fields and methods and 168 types. 0 are considered part of the current module and 8 had all of their fields and methods traversed.
    Compiling 1 permutation
       Compiling permutation 0...
-      Linking per-type JS with 58 new/changed types.
+      Linking per-type JS with 0 new/changed types.
       Source Maps Enabled
    Compile of permutations succeeded
-   Compilation succeeded -- 6,879s
-Linking into C:\Users\39371\Desktop\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\war\sweng2024; Writing extras to C:\Users\39371\Desktop\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\extras\sweng2024
+   Compilation succeeded -- 1,918s
+Linking into C:\Users\quart\Desktop\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\war\sweng2024; Writing extras to C:\Users\quart\Desktop\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\extras\sweng2024
    Link succeeded
-   Linking succeeded -- 0,475s
-9,055s total -- Compile completed
+   Linking succeeded -- 0,339s
+3,066s total -- Compile completed

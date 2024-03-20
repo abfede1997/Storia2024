@@ -11,15 +11,24 @@ public class Scenario implements ScenarioGenerale, Serializable, Comparable<Scen
     private int id;
     private String descrizione;
     private String azione;
-    private String oggetto;
+    private String raccogliOggetto;
+    private String usaOggetto;
+    private String indovinelloRisposta;
     private Map<Integer, Scenario> proseguimento;
 
-    public Scenario(final int id, final String descrizione, final String azione, final String oggetto) {
+    public Scenario(final int id,
+                    final String descrizione,
+                    final String azione,
+                    final String raccogliOggetto,
+                    final String usaOggetto,
+                    final String indovinelloRisposta) {
         this.id = id;
         this.descrizione = descrizione;
         this.azione = azione;
-        this.oggetto = oggetto;
-        proseguimento = new HashMap<>();
+        this.raccogliOggetto = raccogliOggetto;
+        this.usaOggetto = usaOggetto;
+        this.indovinelloRisposta = indovinelloRisposta;
+        this.proseguimento = new HashMap<>();
     }
 
     public Scenario() {
@@ -30,10 +39,13 @@ public class Scenario implements ScenarioGenerale, Serializable, Comparable<Scen
         return this.descrizione;
     }
 
-    public String getOggetto() {
-        return oggetto;
+    public String getIndovinello() {
+        return indovinelloRisposta;
     }
-
+    public String getRaccogliOggetto() {
+        return raccogliOggetto;
+    }
+    public String getUsaOggetto() { return usaOggetto; }
     @Override
     public void setDescrizione(final String descrizione) {
         this.descrizione = descrizione;
@@ -58,25 +70,17 @@ public class Scenario implements ScenarioGenerale, Serializable, Comparable<Scen
         return this.proseguimento;
     }
 
-    public static void printStory(Scenario scenario) {
-        console(scenario.descrizione);
-        console(scenario.azione);
-        scenario.getProseguimento().entrySet().forEach(e -> console(scenario.getId() + " " + e.getKey()));
-        scenario.getProseguimento().forEach((key, value) -> printStory(value));
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scenario scenario = (Scenario) o;
-        return id == scenario.id && Objects.equals(descrizione, scenario.descrizione) && Objects.equals(azione, scenario.azione) && Objects.equals(oggetto, scenario.oggetto) && Objects.equals(proseguimento, scenario.proseguimento);
+        return id == scenario.id && Objects.equals(descrizione, scenario.descrizione) && Objects.equals(azione, scenario.azione) && Objects.equals(raccogliOggetto, scenario.raccogliOggetto) && Objects.equals(usaOggetto, scenario.usaOggetto) && Objects.equals(indovinelloRisposta, scenario.indovinelloRisposta) && Objects.equals(proseguimento, scenario.proseguimento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, descrizione, azione, oggetto, proseguimento);
+        return Objects.hash(id, descrizione, azione, raccogliOggetto, usaOggetto, indovinelloRisposta, proseguimento);
     }
 
     @Override
@@ -91,6 +95,15 @@ public class Scenario implements ScenarioGenerale, Serializable, Comparable<Scen
         }
         return azioneComparison;
     }
+
+    public static void printStory(Scenario scenario) {
+        console(scenario.descrizione);
+        console(scenario.azione);
+        scenario.getProseguimento().forEach((key1, value1) -> console(scenario.getId() + " " + key1));
+        scenario.getProseguimento().forEach((key, value) -> printStory(value));
+    }
+
+
 
     public static native void console(String text)
     /*-{

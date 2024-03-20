@@ -2,6 +2,7 @@ package com.example.client;
 
 import com.example.client.services.LoginService;
 import com.example.client.services.LoginServiceAsync;
+import com.example.shared.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -61,16 +62,26 @@ public class Login extends Composite {
 
         loginButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent click) {
-                loginService.login(usernameBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
+
+                loginService.setUserLogged(new User(usernameBox.getText(), passwordBox.getText()), new AsyncCallback<Boolean>() {
                     @Override
-                    public void onFailure(Throwable arg0) {
-                        Window.alert("error");
-                    }
+                    public void onFailure(Throwable throwable) { Window.alert("error saving user logged"); }
 
                     @Override
-                    public void onSuccess(Boolean arg0) {
-                        if (arg0) app.goToHomePage();
-                        else Window.alert("Credenziali non valide");
+                    public void onSuccess(Boolean aBoolean) {
+                        loginService.login(usernameBox.getText(), passwordBox.getText(), new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable arg0) {
+                                Window.alert("error logging in");
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean arg0) {
+                                if (arg0) {
+                                    app.goToHomePage();
+                                } else Window.alert("Credenziali non valide");
+                            }
+                        });
                     }
                 });
             }

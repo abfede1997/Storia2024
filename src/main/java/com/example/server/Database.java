@@ -22,7 +22,13 @@ public class Database {
     }
 
     public static Database getInstance() {
+//        if (instance == null) {
+//            synchronized(Database.class) {
+//                if (instance==null) {
         instance = new Database();
+//                }
+//            }
+//        }
         return instance;
     }
 
@@ -38,9 +44,9 @@ public class Database {
         return stories;
     }
 
-    public User checkLogin(String username, String password) {
+    public User checkLogin(String email, String password) {
         NavigableSet<User> userSet = fileDB.treeSet("users", User.class).createOrOpen();
-        User newUser = new User(username, password);
+        User newUser = new User(email, password);
         boolean tmp = userSet.contains(newUser);
         fileDB.close();
         fileDB = null;
@@ -80,4 +86,26 @@ public class Database {
         return true;
     }
 
+    public boolean setUserLogged(User user) {
+        NavigableSet<User> userLoggedSet = fileDB.treeSet("userLogged", User.class).createOrOpen();
+        userLoggedSet.clear();
+        userLoggedSet.add(user);
+        if(userLoggedSet.contains(user)){
+            fileDB.commit();
+            fileDB.close();
+            fileDB = null;
+            return true;
+        }
+        fileDB.close();
+        fileDB = null;
+        return false;
+    }
+
+    public User getUserLogged() {
+        NavigableSet<User> userLoggedSet = fileDB.treeSet("userLogged", User.class).createOrOpen();
+        User tmp = userLoggedSet.first();
+        fileDB.close();
+        fileDB = null;
+        return tmp;
+    }
 }

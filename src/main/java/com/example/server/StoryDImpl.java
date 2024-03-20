@@ -1,8 +1,8 @@
 package com.example.server;
 
-import java.util.List;
-
 import com.example.shared.Story;
+
+import java.util.List;
 
 public class StoryDImpl implements StoryD {
 
