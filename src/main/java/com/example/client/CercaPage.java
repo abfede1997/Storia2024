@@ -13,19 +13,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.example.client.services.GetStoriesService;
 import com.example.client.services.GetStoriesServiceAsync;
 import com.example.shared.Story;
  
 public class CercaPage extends Composite {
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
-    private List<Story> allStories;
+    
  
     private VerticalPanel mainPanel = new VerticalPanel();
     private FlexTable resultsTable = new FlexTable();
@@ -66,38 +60,41 @@ public class CercaPage extends Composite {
         mainPanel.setStyleName("mainPanel");
         resultsTable.setStyleName("resultsTable");
 
-        getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
-            @Override
-            public void onFailure(Throwable throwable) {
-                Window.alert("error");
-            }
-
-            @Override
-            public void onSuccess(List<Story> stories) {
-                allStories = stories;
-                allStories.forEach(s -> {
-                    storiesList.addItem(s.getNome());
-                });
-
-            }
-        });
-
-
         // Metodo bottone di ricerca 
         searchButton.addClickHandler(new ClickHandler() {
-            @SuppressWarnings("unused")
             @Override
             public void onClick(ClickEvent event) {
-                if (searchBox.getText().isEmpty()) {
-                   List<Story> storiesList = allStories.stream().collect(Collectors.toList());
-                   listPanel.setVisible(true);
+                String searchText = searchBox.getText().trim();
+                if (!searchText.isEmpty()) {
+                    //Chiamata RPC per ottenere la storia in base al nome
+                    getStoriesAsync.getStoryByName(searchText, new AsyncCallback<Story>() {
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            // Gestire eventuali errori
+                            Window.alert("Errore durante la ricerca della storia: " + caught.getMessage());
+                        }
+        
+                        @Override
+                        public void onSuccess(Story story) {
+                            if (story != null) {
+                                // Se la storia è stata trovata, aggiungila alla ListBox
+                                storiesList.clear();
+                                storiesList.addItem(story.getNome());
+                                Window.alert("Baggio 30");
+                            } else {
+                                // Se la storia non è stata trovata, mostra un messaggio di avviso
+                                Window.alert("Nessuna storia trovata con il nome '" + searchText + "'");
+                            }
+                        }
+                    });
+                } else {
+                    Window.alert("Inserisci un nome di storia valido");
                 }
             }
-        });
-
-
+                
+            });
+            
+        
     }
-
-   
 }
 

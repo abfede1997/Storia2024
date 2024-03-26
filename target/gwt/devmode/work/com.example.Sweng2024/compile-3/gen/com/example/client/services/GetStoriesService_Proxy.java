@@ -32,6 +32,18 @@ public class GetStoriesService_Proxy extends RemoteServiceProxy implements com.e
       async.onFailure(ex);
     }
   }
+  
+  public void getStoryByName(java.lang.String name, com.google.gwt.user.client.rpc.AsyncCallback callback) {
+    com.google.gwt.user.client.rpc.impl.RemoteServiceProxy.ServiceHelper helper = new com.google.gwt.user.client.rpc.impl.RemoteServiceProxy.ServiceHelper("GetStoriesService_Proxy", "getStoryByName");
+    try {
+      SerializationStreamWriter streamWriter = helper.start(REMOTE_SERVICE_INTERFACE_NAME, 1);
+      streamWriter.writeString("java.lang.String/2004016611");
+      streamWriter.writeString(name);
+      helper.finish(callback, ResponseReader.OBJECT);
+    } catch (SerializationException ex) {
+      callback.onFailure(ex);
+    }
+  }
   @Override
   public SerializationStreamWriter createStreamWriter() {
     ClientSerializationStreamWriter toReturn =

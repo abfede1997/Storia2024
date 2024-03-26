@@ -9,4 +9,5 @@ import java.util.List;
 @RemoteServiceRelativePath("getStories")
 public interface GetStoriesService extends RemoteService {
     List<Story> getStories();
+    Story getStoryByName(String name);
 }

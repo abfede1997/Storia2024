@@ -10,6 +10,8 @@ public interface StoryD {
 
     public List<Story> getStories();
 
+    Story getStoryByName(String name);
+
   
 
 }
