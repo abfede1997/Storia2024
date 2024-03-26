@@ -1,21 +1,38 @@
 package com.example.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.example.client.services.GetStoriesService;
+import com.example.client.services.GetStoriesServiceAsync;
+import com.example.shared.Story;
  
 public class CercaPage extends Composite {
+    private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
+    private List<Story> allStories;
  
     private VerticalPanel mainPanel = new VerticalPanel();
     private FlexTable resultsTable = new FlexTable();
+    
  
     public CercaPage() {
+
         initWidget(mainPanel);
  
         // Titolo della pagina
@@ -29,17 +46,18 @@ public class CercaPage extends Composite {
         Button searchButton = new Button("Cerca");
         searchButton.addStyleName("searchButton");
 
-        // Aggiungi il click handler al bottone di ricerca
-        searchButton.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                //populateResultsTable();
-            }
-        });
+        //lista di ricerca 
+        HorizontalPanel listPanel = new HorizontalPanel();
+        ListBox storiesList = new ListBox();
+        listPanel.add(storiesList);
 
+        
         searchPanel.add(searchBox);
         searchPanel.add(searchButton);
         mainPanel.add(searchPanel);
+        mainPanel.add(listPanel);
+
+        listPanel.setVisible(false);
  
         // Risultati della ricerca
         mainPanel.add(resultsTable);
@@ -48,28 +66,37 @@ public class CercaPage extends Composite {
         mainPanel.setStyleName("mainPanel");
         resultsTable.setStyleName("resultsTable");
 
+        getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                Window.alert("error");
+            }
 
-        // Simulazione di risultati di ricerca
-        //simulateSearchResults();
+            @Override
+            public void onSuccess(List<Story> stories) {
+                allStories = stories;
+                allStories.forEach(s -> {
+                    storiesList.addItem(s.getNome());
+                });
+
+            }
+        });
+
+
+        // Metodo bottone di ricerca 
+        searchButton.addClickHandler(new ClickHandler() {
+            @SuppressWarnings("unused")
+            @Override
+            public void onClick(ClickEvent event) {
+                if (searchBox.getText().isEmpty()) {
+                   List<Story> storiesList = allStories.stream().collect(Collectors.toList());
+                   listPanel.setVisible(true);
+                }
+            }
+        });
+
+
     }
- 
-    // Metodo per popolare la tabella dei risultati con tutte le storie dal server
-    /*private void populateResultsTable() {
-        // Rimuovi eventuali risultati precedenti
-        resultsTable.removeAllRows();
-
-        // Ottieni tutte le storie dal server
-        NavigableSet<Story> storySet = Database.getInstance().getStorySet();
-
-        // Popola la tabella dei risultati con le storie ottenute
-        int row = 0;
-        for (Story story : storySet) {
-            resultsTable.setText(row, 0, story.getNome());
-            resultsTable.setText(row, 1, story.getDescrizione());
-            // Aggiungi altre colonne se necessario
-            row++;
-        }
-    }*/
 
    
 }
