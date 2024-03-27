@@ -1,13 +1,104 @@
 binding: user.agent=gecko1_8
 Compiling module com.example.Sweng2024
-   Unification traversed 1034 fields and methods and 646 types. 16 are considered part of the current module and 24 had all of their fields and methods traversed.
+   Unification traversed 1515 fields and methods and 937 types. 43 are considered part of the current module and 53 had all of their fields and methods traversed.
    Compiling 1 permutation
       Compiling permutation 0...
-      Linking per-type JS with 16 new/changed types.
-      Source Maps Enabled
-   Compile of permutations succeeded
-   Compilation succeeded -- 5,353s
-Linking into C:\Users\39371\Desktop\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\war\sweng2024; Writing extras to C:\Users\39371\Desktop\Storia2024\target\gwt\devmode\work\com.example.Sweng2024\compile-2\extras\sweng2024
-   Link succeeded
-   Linking succeeded -- 0,734s
-7,807s total -- Compile completed
+      [ERROR] An internal compiler exception occurred
+com.google.gwt.dev.jjs.InternalCompilerException: Unexpected error during visit.
+	at com.google.gwt.dev.jjs.ast.JVisitor.translateException(JVisitor.java:111)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:130)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transform(GenerateJavaScriptAST.java:2604)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformExpressionStatement(GenerateJavaScriptAST.java:700)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformExpressionStatement(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:735)
+	at com.google.gwt.dev.jjs.ast.JExpressionStatement.traverse(JExpressionStatement.java:41)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transformIntoExcludingNulls(JTransformer.java:1087)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformBlock(GenerateJavaScriptAST.java:581)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformBlock(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:627)
+	at com.google.gwt.dev.jjs.ast.JBlock.traverse(JBlock.java:93)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transform(GenerateJavaScriptAST.java:2612)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformMethodBody(GenerateJavaScriptAST.java:821)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformMethodBody(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:834)
+	at com.google.gwt.dev.jjs.ast.JMethodBody.traverse(JMethodBody.java:81)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformMethod(GenerateJavaScriptAST.java:792)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformMethod(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:828)
+	at com.google.gwt.dev.jjs.ast.JMethod.traverse(JMethod.java:777)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.emitStaticMethods(GenerateJavaScriptAST.java:1813)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformDeclaredType(GenerateJavaScriptAST.java:644)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformDeclaredType(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transformClassType(JTransformer.java:95)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:675)
+	at com.google.gwt.dev.jjs.ast.JClassType.traverse(JClassType.java:145)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformProgram(GenerateJavaScriptAST.java:1230)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformProgram(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:923)
+	at com.google.gwt.dev.jjs.ast.JProgram.traverse(JProgram.java:1248)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:122)
+	at com.google.gwt.dev.jjs.ast.JTransformer.transform(JTransformer.java:1067)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST.execImpl(GenerateJavaScriptAST.java:3111)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST.exec(GenerateJavaScriptAST.java:2884)
+	at com.google.gwt.dev.jjs.JavaToJavaScriptCompiler.compilePermutation(JavaToJavaScriptCompiler.java:378)
+	at com.google.gwt.dev.jjs.JavaToJavaScriptCompiler.compilePermutation(JavaToJavaScriptCompiler.java:272)
+	at com.google.gwt.dev.CompilePerms.compile(CompilePerms.java:198)
+	at com.google.gwt.dev.ThreadedPermutationWorkerFactory$ThreadedPermutationWorker.compile(ThreadedPermutationWorkerFactory.java:50)
+	at com.google.gwt.dev.PermutationWorkerFactory$Manager$WorkerThread.run(PermutationWorkerFactory.java:74)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.NullPointerException: Cannot invoke "String.isEmpty()" because "actualJsName" is null
+	at com.google.gwt.dev.jjs.ast.JMethod.getQualifiedJsName(JMethod.java:172)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.createStaticReference(GenerateJavaScriptAST.java:1765)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.dispatchToStatic(GenerateJavaScriptAST.java:896)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformMethodCall(GenerateJavaScriptAST.java:884)
+	at com.google.gwt.dev.jjs.impl.GenerateJavaScriptAST$GenerateJavaScriptTransformer.transformMethodCall(GenerateJavaScriptAST.java:518)
+	at com.google.gwt.dev.jjs.ast.JTransformer$JRewriterVisitor.visit(JTransformer.java:840)
+	at com.google.gwt.dev.jjs.ast.JMethodCall.traverse(JMethodCall.java:265)
+	at com.google.gwt.dev.jjs.ast.JVisitor.accept(JVisitor.java:127)
+	... 57 more
+         [ERROR] at Scenario.java(102): Scenario.console(scenario_0.getId() + " " + key1_1)
+            com.google.gwt.dev.jjs.ast.JMethodCall
+         [ERROR] at Scenario.java(102): Scenario.console(scenario_0.getId() + " " + key1_1)
+            com.google.gwt.dev.jjs.ast.JExpressionStatement
+         [ERROR] at Scenario.java(102): {
+  Scenario.console(scenario_0.getId() + " " + key1_1);
+}
+            com.google.gwt.dev.jjs.ast.JBlock
+         [ERROR] at Scenario.java(102): {
+  Scenario.console(scenario_0.getId() + " " + key1_1);
+}
+            com.google.gwt.dev.jjs.ast.JMethodBody
+         [ERROR] at Scenario.java(102): com.example.shared.Scenario.lambda$0(Lcom/example/shared/Scenario;Ljava/lang/Integer;Lcom/example/shared/Scenario;)V
+            com.google.gwt.dev.jjs.ast.JMethod
+         [ERROR] at Scenario.java(10): com.example.shared.Scenario (extends Object implements ScenarioGenerale, Serializable, Comparable)
+            com.google.gwt.dev.jjs.ast.JClassType
+         [ERROR] at Unknown(0): <JProgram>
+            com.google.gwt.dev.jjs.ast.JProgram
+      [ERROR] Unrecoverable exception, shutting down
+com.google.gwt.core.ext.UnableToCompleteException: (see previous log entries)
+	at com.google.gwt.dev.javac.CompilationProblemReporter.logAndTranslateException(CompilationProblemReporter.java:106)
+	at com.google.gwt.dev.jjs.JavaToJavaScriptCompiler.compilePermutation(JavaToJavaScriptCompiler.java:459)
+	at com.google.gwt.dev.jjs.JavaToJavaScriptCompiler.compilePermutation(JavaToJavaScriptCompiler.java:272)
+	at com.google.gwt.dev.CompilePerms.compile(CompilePerms.java:198)
+	at com.google.gwt.dev.ThreadedPermutationWorkerFactory$ThreadedPermutationWorker.compile(ThreadedPermutationWorkerFactory.java:50)
+	at com.google.gwt.dev.PermutationWorkerFactory$Manager$WorkerThread.run(PermutationWorkerFactory.java:74)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+      [ERROR] Not all permutation were compiled , completed (0/1)
