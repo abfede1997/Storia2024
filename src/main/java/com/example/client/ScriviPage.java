@@ -76,7 +76,7 @@ public class ScriviPage extends Composite {
 
         RootPanel.get().add(storyPanel);
         FlowPanel mainPanel = new FlowPanel();
-        List<Septuplet<Label, TextBox, TextBox, ListBox, TextBox, TextBox, TextBox>> scenarios = new ArrayList<>();
+        List<Septuplet<Label, TextBox, TextBox, ListBox, List<RadioButton>, TextBox, TextBox>> scenarios = new ArrayList<>();
 
 
         confirmNumScenari.addClickHandler(new ClickHandler() {
@@ -106,12 +106,20 @@ public class ScriviPage extends Composite {
                                     List<Scenario> storyScenarios = new ArrayList<>();
 
                                     scenarios.forEach(s -> {
+                                        String usaOggetto = "";
+                                        String raccogliOggetto = "";
+
+                                        if(s.getE().get(1).isChecked()){
+                                            raccogliOggetto = s.getF().getText();
+                                        } else if(s.getE().get(2).isChecked()){
+                                            usaOggetto = s.getF().getText();
+                                        }
                                         storyScenarios.add(new Scenario(
                                                 Integer.parseInt(s.getA().getText()),
                                                 s.getB().getText(),
                                                 s.getC().getText(),
-                                                s.getE().getText(),
-                                                s.getF().getText(),
+                                                raccogliOggetto,
+                                                usaOggetto,
                                                 s.getG().getText()
                                         ));
                                     });
@@ -158,19 +166,21 @@ public class ScriviPage extends Composite {
                     HorizontalPanel horPanelColumns = new HorizontalPanel();
                     Label idColumn = new Label("ID");
                     Label descColumn = new Label("Descrizione");
-                    Label indovinelloColumn = new Label("Indovinello?");
+                    Label tipoScenario = new Label("Tipo Scenario");
+                    Label indovinelloColumn = new Label("Risposta Indovinello");
                     Label azioneColumn = new Label("Azione");
                     Label parentColumn = new Label("Scenario Precedente");
-                    Label raccogliOggettoColumn = new Label("Oggetto da raccogliere");
-                    Label usaOggettoColumn = new Label("Oggetto da usare per accedere allo scenario");
+                    Label azioneOggetto = new Label("Tipo Oggetto");
+                    Label oggettoLabel = new Label("Oggetto");
 
                     horPanelColumns.add(idColumn);
                     horPanelColumns.add(descColumn);
+                    horPanelColumns.add(tipoScenario);
                     horPanelColumns.add(indovinelloColumn);
                     horPanelColumns.add(azioneColumn);
                     horPanelColumns.add(parentColumn);
-                    horPanelColumns.add(raccogliOggettoColumn);
-                    horPanelColumns.add(usaOggettoColumn);
+                    horPanelColumns.add(azioneOggetto);
+                    horPanelColumns.add(oggettoLabel);
 
                     mainPanel.add(horPanelColumns);
 
@@ -180,7 +190,12 @@ public class ScriviPage extends Composite {
 
                         Label id = new Label(String.valueOf(i));
 
+                        RadioButton scenarioNormale = new RadioButton("tipoScenario" + i, "Normale");
+                        scenarioNormale.setChecked(true);
+                        RadioButton scenarioIndovinello = new RadioButton("tipoScenario" + i, "Indovinello");
+
                         TextBox indovinello = new TextBox();
+                        indovinello.setEnabled(false);
 
                         TextBox desc = new TextBox();
                         desc.setText("Descrizione " + i);
@@ -193,29 +208,98 @@ public class ScriviPage extends Composite {
                             parent.addItem(Integer.toString(j));
                         }
 
-                        TextBox raccogliOggetto = new TextBox();
+                        RadioButton noOggetto = new RadioButton("tipoOggetto" + i, "No Oggetto");
+                        noOggetto.setChecked(true);
+                        RadioButton raccogliOggetto = new RadioButton("tipoOggetto" + i, "Raccogli Oggetto");
+                        RadioButton usaOggetto = new RadioButton("tipoOggetto" + i, "Usa Oggetto");
+                        List<RadioButton> listaAzioneOggetti = new ArrayList<>();
+                        listaAzioneOggetti.add(noOggetto);
+                        listaAzioneOggetti.add(raccogliOggetto);
+                        listaAzioneOggetti.add(usaOggetto);
 
-                        TextBox usaOggetto = new TextBox();
+
+                        TextBox oggetto = new TextBox();
+                        oggetto.setEnabled(false);
+
+
+                        scenarioNormale.addClickHandler(new ClickHandler() {
+                            @Override
+                            public void onClick(ClickEvent clickEvent) {
+                                indovinello.setText("");
+                                indovinello.setEnabled(false);
+
+                                noOggetto.setEnabled(true);
+                                raccogliOggetto.setEnabled(true);
+                                usaOggetto.setEnabled(true);
+
+                                if(raccogliOggetto.isChecked() || usaOggetto.isChecked())
+                                    oggetto.setEnabled(true);
+                            }
+                        });
+
+                        scenarioIndovinello.addClickHandler(new ClickHandler() {
+                            @Override
+                            public void onClick(ClickEvent clickEvent) {
+                                indovinello.setEnabled(true);
+
+                                noOggetto.setEnabled(false);
+                                raccogliOggetto.setEnabled(false);
+                                usaOggetto.setEnabled(false);
+                                oggetto.setEnabled(false);
+                                oggetto.setText("");
+                            }
+                        });
+
+
+                        noOggetto.addClickHandler(new ClickHandler() {
+                            @Override
+                            public void onClick(ClickEvent clickEvent) {
+                                oggetto.setText("");
+                                oggetto.setEnabled(false);
+                            }
+                        });
+
+                        raccogliOggetto.addClickHandler(new ClickHandler() {
+                            @Override
+                            public void onClick(ClickEvent clickEvent) {
+                                oggetto.setEnabled(true);
+                            }
+                        });
+
+                        usaOggetto.addClickHandler(new ClickHandler() {
+                            @Override
+                            public void onClick(ClickEvent clickEvent) {
+                                oggetto.setEnabled(true);
+                            }
+                        });
+
+
 
                         if (i == 0){
                             azione.setEnabled(false);
-                            azione.setVisible(false);
                             parent.setEnabled(false);
-                            parent.setVisible(false);
+                            oggetto.setEnabled(false);
+                            indovinello.setEnabled(false);
+                            scenarioNormale.setEnabled(false);
+                            scenarioIndovinello.setEnabled(false);
                             usaOggetto.setEnabled(false);
-                            usaOggetto.setVisible(false);
-                            indovinello.setVisible(false);
                         }
 
                         horPanel.add(id);
                         horPanel.add(desc);
+                        horPanel.add(scenarioNormale);
+                        horPanel.add(scenarioIndovinello);
                         horPanel.add(indovinello);
                         horPanel.add(azione);
                         horPanel.add(parent);
+                        horPanel.add(noOggetto);
                         horPanel.add(raccogliOggetto);
                         horPanel.add(usaOggetto);
+                        horPanel.add(oggetto);
 
-                        scenarios.add(new Septuplet<>(id, desc, azione, parent, raccogliOggetto, usaOggetto, indovinello));
+
+
+                        scenarios.add(new Septuplet<>(id, desc, azione, parent, listaAzioneOggetti, oggetto, indovinello));
 
                         mainPanel.add(horPanel);
                         mainPanel.add(createStory);

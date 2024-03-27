@@ -1,2 +1,0 @@
-serviceClass: com.example.client.services.GetStoriesService
-path: E12773F3512E6ED3AA3294501C6FF51C.gwt.rpc

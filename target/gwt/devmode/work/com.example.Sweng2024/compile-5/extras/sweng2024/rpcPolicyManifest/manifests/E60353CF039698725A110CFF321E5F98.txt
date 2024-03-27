@@ -1,2 +1,0 @@
-serviceClass: com.example.client.services.LoginService
-path: F093E2BFB798C9B086F05C995ABA385B.gwt.rpc

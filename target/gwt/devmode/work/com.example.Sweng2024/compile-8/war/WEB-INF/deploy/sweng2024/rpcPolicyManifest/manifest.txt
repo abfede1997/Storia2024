@@ -1,6 +1,0 @@
-# Module sweng2024
-# RPC service class, partial path of RPC policy file
-com.example.client.services.AddStoryService, CD4DEC096330C9697A1A2147C4F4D0BB.gwt.rpc
-com.example.client.services.GetStoriesService, E12773F3512E6ED3AA3294501C6FF51C.gwt.rpc
-com.example.client.services.LoginService, F093E2BFB798C9B086F05C995ABA385B.gwt.rpc
-com.example.client.services.RegisterService, 1AF5C7B450FEA93919F78C8702A1D0FF.gwt.rpc
