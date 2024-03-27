@@ -4,7 +4,6 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
-
 public class Sweng2024 implements EntryPoint {
   
   public void onModuleLoad() {
@@ -54,7 +53,7 @@ public class Sweng2024 implements EntryPoint {
   } 
   private void showPagaPage() {
     RootPanel.get().clear();
-    PagaPage pagaPage = new PagaPage();
+    PagaPage pagaPage = new PagaPage(this);
     RootPanel.get().add(pagaPage);
   }
   private void showScriviPage() {
