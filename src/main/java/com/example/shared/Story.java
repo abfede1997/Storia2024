@@ -36,8 +36,12 @@ public class Story implements Serializable, Comparable<Story> {
     public Scenario getInizio() {
         return inizio;
     }
-    public List<String> getInventario(){ return inventario; }
-    public String getCategoria() { return categoria; }
+    public List<String> getInventario(){ 
+        return inventario; 
+    }
+    public String getCategoria() { 
+        return categoria; 
+    }
 
     public String getAutore() {
         return autore;

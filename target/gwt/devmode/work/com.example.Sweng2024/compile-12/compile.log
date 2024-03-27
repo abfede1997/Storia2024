@@ -1,0 +1,14 @@
+binding: user.agent=safari
+Compiling module com.example.Sweng2024
+   Unification traversed 702 fields and methods and 443 types. 4 are considered part of the current module and 12 had all of their fields and methods traversed.
+   [WARN] Some stale types ([com.example.client.CercaPage$1$1$1]) were not reprocessed as was expected. This is either a compiler bug or a Generator has legitimately stopped creating these types.
+   Compiling 1 permutation
+      Compiling permutation 0...
+      Linking per-type JS with 4 new/changed types.
+      Source Maps Enabled
+   Compile of permutations succeeded
+   Compilation succeeded -- 3,142s
+Linking into /Users/valentinasant/Storia2024/target/gwt/devmode/work/com.example.Sweng2024/compile-12/war/sweng2024; Writing extras to /Users/valentinasant/Storia2024/target/gwt/devmode/work/com.example.Sweng2024/compile-12/extras/sweng2024
+   Link succeeded
+   Linking succeeded -- 0,278s
+4,503s total -- Compile completed

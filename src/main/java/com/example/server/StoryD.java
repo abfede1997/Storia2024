@@ -12,6 +12,7 @@ public interface StoryD {
 
     Story getStoryByName(String name);
 
+    Story getStoryByCategoria(String categoria);
   
 
 }

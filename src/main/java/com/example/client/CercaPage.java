@@ -13,9 +13,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+
 import com.example.client.services.GetStoriesService;
 import com.example.client.services.GetStoriesServiceAsync;
 import com.example.shared.Story;
+import com.example.shared.Scenario;
  
 public class CercaPage extends Composite {
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
@@ -23,6 +26,7 @@ public class CercaPage extends Composite {
  
     private VerticalPanel mainPanel = new VerticalPanel();
     private FlexTable resultsTable = new FlexTable();
+    private Scenario inizioStoria;
     
  
     public CercaPage() {
@@ -37,6 +41,15 @@ public class CercaPage extends Composite {
         // Pannello di ricerca
         HorizontalPanel searchPanel = new HorizontalPanel();
         final TextBox searchBox = new TextBox();
+
+        //Menu a tendina per i filtri
+        ListBox filtro = new ListBox();
+        filtro.addItem("Nome Storia");
+        filtro.addItem("Categoria");
+        filtro.addItem("Lunghezza Storia");
+        filtro.addItem("Autore");
+
+        //bottone di ricerca
         Button searchButton = new Button("Cerca");
         searchButton.addStyleName("searchButton");
 
@@ -45,8 +58,10 @@ public class CercaPage extends Composite {
         ListBox storiesList = new ListBox();
         listPanel.add(storiesList);
 
+
         
         searchPanel.add(searchBox);
+        searchPanel.add(filtro);
         searchPanel.add(searchButton);
         mainPanel.add(searchPanel);
         mainPanel.add(listPanel);
@@ -60,39 +75,54 @@ public class CercaPage extends Composite {
         mainPanel.setStyleName("mainPanel");
         resultsTable.setStyleName("resultsTable");
 
+        VerticalPanel pRisultato = new VerticalPanel();
+
         // Metodo bottone di ricerca 
         searchButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 String searchText = searchBox.getText().trim();
-                if (!searchText.isEmpty()) {
-                    //Chiamata RPC per ottenere la storia in base al nome
-                    getStoriesAsync.getStoryByName(searchText, new AsyncCallback<Story>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            // Gestire eventuali errori
-                            Window.alert("Errore durante la ricerca della storia: " + caught.getMessage());
-                        }
-        
-                        @Override
-                        public void onSuccess(Story story) {
-                            if (story != null) {
-                                // Se la storia è stata trovata, aggiungila alla ListBox
-                                storiesList.clear();
-                                storiesList.addItem(story.getNome());
-                                Window.alert("Baggio 30");
-                            } else {
-                                // Se la storia non è stata trovata, mostra un messaggio di avviso
-                                Window.alert("Nessuna storia trovata con il nome '" + searchText + "'");
+                if (filtro.getSelectedIndex() == 0) {
+                    if (!searchText.isEmpty()) {
+                        //Chiamata RPC per ottenere la storia in base al nome
+                        getStoriesAsync.getStoryByName(searchText, new AsyncCallback<Story>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                // Gestire eventuali errori
+                                Window.alert("Errore durante la ricerca della storia: " + caught.getMessage());
                             }
-                        }
-                    });
-                } else {
-                    Window.alert("Inserisci un nome di storia valido");
+                            @Override
+                            public void onSuccess(Story story) {
+                                if (story != null) {
+                                    // Se la storia è stata trovata, aggiungila alla ListBox
+                                    storiesList.clear();
+                                    storiesList.addItem(story.getNome());
+                                    //Pannello risultato
+                                    Label nomeStoria = new Label(story.getNome());
+                                    pRisultato.add(nomeStoria);
+                                    //pRisultato.add(inizioStoria);
+                                    mainPanel.add(pRisultato);
+                                } else {
+                                    // Se la storia non è stata trovata, mostra un messaggio di avviso                        
+                                    Window.alert("Nessuna storia trovata con il nome '" + searchText + "'");
+                                }                
+                            }
+                        });
+                    } else {
+                        Window.alert("Inserisci un nome di storia valido");
+                    }
+                } else if (filtro.getSelectedIndex() == 1){
+                    
+                } else if(filtro.getSelectedIndex() == 2){
+
+                }else if(filtro.getSelectedIndex() == 3){
+
                 }
-            }
-                
-            });
+
+            
+            } 
+        });
+
             
         
     }

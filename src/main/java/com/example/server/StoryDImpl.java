@@ -30,4 +30,16 @@ public class StoryDImpl implements StoryD {
         return null; // Se non viene trovata nessuna storia con il nome specificato
     }
 
+    @Override
+    public Story getStoryByCategoria(String categoria) {
+        // Implementazione per ottenere una storia in base alla categoria
+        List<Story> stories = Database.getInstance().getStories();
+        for (Story s : stories) {
+            if (s.getCategoria().equals(categoria)) {
+                return s;
+            }
+        }
+        return null; // Se non viene trovata nessuna storia con la categoria specificata
+    }
+
 }

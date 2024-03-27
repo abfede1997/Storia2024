@@ -8,4 +8,5 @@ import java.util.List;
 public interface GetStoriesServiceAsync {
     void getStories(AsyncCallback<List<Story>> async);
     void getStoryByName(String name, AsyncCallback<Story> callback);
+    void getStoryByCategoria(String categoria, AsyncCallback<Story> callback);
 }

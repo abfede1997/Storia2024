@@ -17,4 +17,10 @@ public class GetStoriesServiceImpl extends RemoteServiceServlet implements GetSt
     public Story getStoryByName(String name) {
         return storyDAO.getStoryByName(name);
     }
+    @Override
+    public Story getStoryByCategoria(String categoria){
+        return storyDAO.getStoryByCategoria(categoria);
+    }
+    
+
 }
