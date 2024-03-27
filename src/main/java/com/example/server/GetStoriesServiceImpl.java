@@ -18,8 +18,12 @@ public class GetStoriesServiceImpl extends RemoteServiceServlet implements GetSt
         return storyDAO.getStoryByName(name);
     }
     @Override
-    public Story getStoryByCategoria(String categoria){
-        return storyDAO.getStoryByCategoria(categoria);
+    public List<Story> getAllStoriesByCategoria(String categoria){
+        return storyDAO.getAllStoriesByCategoria(categoria);
+    }
+    @Override
+    public List<Story> getAllStoriesByAutore(String autore){
+        return storyDAO.getAllStoriesByAutore(autore);
     }
     
 

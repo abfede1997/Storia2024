@@ -10,5 +10,7 @@ import java.util.List;
 public interface GetStoriesService extends RemoteService {
     List<Story> getStories();
     Story getStoryByName(String name);
-    Story getStoryByCategoria(String categoria);
+    List<Story> getAllStoriesByCategoria(String categoria);
+    List<Story> getAllStoriesByAutore(String autore);
+    
 }

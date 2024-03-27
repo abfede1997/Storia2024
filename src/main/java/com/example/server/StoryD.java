@@ -10,9 +10,11 @@ public interface StoryD {
 
     public List<Story> getStories();
 
-    Story getStoryByName(String name);
+    public Story getStoryByName(String name);
 
-    Story getStoryByCategoria(String categoria);
+    public List<Story> getAllStoriesByCategoria(String categoria);
+
+    public List<Story> getAllStoriesByAutore(String autore);
   
 
 }

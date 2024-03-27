@@ -80,6 +80,7 @@ public class ScriviPage extends Composite {
 
 
         confirmNumScenari.addClickHandler(new ClickHandler() {
+            @SuppressWarnings("deprecation")
             @Override
             public void onClick(ClickEvent event) {
                 if(!inputNumScenari.getText().isEmpty()) {

@@ -2,6 +2,7 @@ package com.example.server;
 
 import com.example.shared.Story;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoryDImpl implements StoryD {
@@ -31,15 +32,29 @@ public class StoryDImpl implements StoryD {
     }
 
     @Override
-    public Story getStoryByCategoria(String categoria) {
-        // Implementazione per ottenere una storia in base alla categoria
+    public List<Story> getAllStoriesByCategoria(String categoria) {
+        // Implementazione per ottenere le storie in base alla categoria
         List<Story> stories = Database.getInstance().getStories();
+        List<Story> storieCategoria = new ArrayList<>();
         for (Story s : stories) {
             if (s.getCategoria().equals(categoria)) {
-                return s;
+                storieCategoria.add(s);
             }
         }
-        return null; // Se non viene trovata nessuna storia con la categoria specificata
+        return storieCategoria; 
+    }
+
+    @Override
+    public List<Story> getAllStoriesByAutore(String autore) {
+        // Implementazione per ottenere le storie in base all'autore
+        List<Story> stories = Database.getInstance().getStories();
+        List<Story> storieAutore = new ArrayList<>();
+        for (Story s : stories) {
+            if (s.getAutore().equals(autore)) {
+                storieAutore.add(s);
+            }
+        }
+        return storieAutore;
     }
 
 }

@@ -11,7 +11,7 @@ public interface UserD {
 
     public User getUserByEmail(String email);
 
-    boolean setUserLogged(User user);
+    public boolean setUserLogged(User user);
 
-    User getUserLogged();
+    public User getUserLogged();
 }

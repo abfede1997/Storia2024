@@ -14,19 +14,19 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import java.util.List;
 
 import com.example.client.services.GetStoriesService;
 import com.example.client.services.GetStoriesServiceAsync;
 import com.example.shared.Story;
-import com.example.shared.Scenario;
  
 public class CercaPage extends Composite {
+    private List<Story> watchStories;
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
     
  
     private VerticalPanel mainPanel = new VerticalPanel();
     private FlexTable resultsTable = new FlexTable();
-    private Scenario inizioStoria;
     
  
     public CercaPage() {
@@ -44,10 +44,11 @@ public class CercaPage extends Composite {
 
         //Menu a tendina per i filtri
         ListBox filtro = new ListBox();
+        filtro.addItem("Nessun Filtro");
         filtro.addItem("Nome Storia");
         filtro.addItem("Categoria");
-        filtro.addItem("Lunghezza Storia");
         filtro.addItem("Autore");
+        //filtro.addItem("Lunghezza Storia");
 
         //bottone di ricerca
         Button searchButton = new Button("Cerca");
@@ -83,6 +84,27 @@ public class CercaPage extends Composite {
             public void onClick(ClickEvent event) {
                 String searchText = searchBox.getText().trim();
                 if (filtro.getSelectedIndex() == 0) {
+                    getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
+
+                        @Override
+                        public void onFailure(Throwable arg0) {
+                            // TODO Auto-generated method stub
+                            throw new UnsupportedOperationException("Errore nel caricamento delle storie!");
+                        }
+            
+                        @Override
+                        public void onSuccess(List<Story> stories) {
+                            // TODO Auto-generated method stub
+                            watchStories = stories;
+                            pRisultato.clear();
+                            watchStories.forEach(s -> {
+                                pRisultato.add(new Label(s.getNome()));
+                                mainPanel.add(pRisultato);
+                            });
+                        }    
+                    });
+
+                } else if (filtro.getSelectedIndex() == 1) {
                     if (!searchText.isEmpty()) {
                         //Chiamata RPC per ottenere la storia in base al nome
                         getStoriesAsync.getStoryByName(searchText, new AsyncCallback<Story>() {
@@ -99,6 +121,7 @@ public class CercaPage extends Composite {
                                     storiesList.addItem(story.getNome());
                                     //Pannello risultato
                                     Label nomeStoria = new Label(story.getNome());
+                                    pRisultato.clear();
                                     pRisultato.add(nomeStoria);
                                     //pRisultato.add(inizioStoria);
                                     mainPanel.add(pRisultato);
@@ -111,15 +134,63 @@ public class CercaPage extends Composite {
                     } else {
                         Window.alert("Inserisci un nome di storia valido");
                     }
-                } else if (filtro.getSelectedIndex() == 1){
-                    
-                } else if(filtro.getSelectedIndex() == 2){
 
-                }else if(filtro.getSelectedIndex() == 3){
+                } else if (filtro.getSelectedIndex() == 2) {
+                    if (!searchText.isEmpty()) {
+                        //Chiamata RPC per ottenere la storia in base al nome
+                        getStoriesAsync.getAllStoriesByCategoria(searchText, new AsyncCallback<List<Story>>() {
+
+                            @Override
+                            public void onFailure(Throwable arg0) {
+                                // TODO Auto-generated method stub
+                                throw new UnsupportedOperationException("Errore nel caricamento delle storie per categoria!");    
+                            }
+
+                            @Override
+                            public void onSuccess(List<Story> storiesC) {
+                                // TODO Auto-generated method stub
+                                watchStories.clear();
+                                watchStories = storiesC;
+                                pRisultato.clear();
+                                watchStories.forEach(s -> {
+                                    pRisultato.add(new Label(s.getNome()));
+                                    mainPanel.add(pRisultato);
+                            });
+                                
+                            }
+                        });
+                    } 
+
+                } else if (filtro.getSelectedIndex() == 3) {
+                    if (!searchText.isEmpty()) {
+                        //Chiamata RPC per ottenere la storia in base al nome
+                        getStoriesAsync.getAllStoriesByAutore(searchText, new AsyncCallback<List<Story>>() {
+
+                            @Override
+                            public void onFailure(Throwable arg0) {
+                                // TODO Auto-generated method stub
+                                throw new UnsupportedOperationException("Errore nel caricamento delle storie per autore!");    
+                            }
+
+                            @Override
+                            public void onSuccess(List<Story> storiesA) {
+                                // TODO Auto-generated method stub
+                                watchStories.clear();
+                                watchStories = storiesA;
+                                pRisultato.clear();
+                                watchStories.forEach(s -> {
+                                    pRisultato.add(new Label(s.getNome()));
+                                    mainPanel.add(pRisultato);
+                            });
+                                
+                            }
+                        });
+                    } 
+                    
+
+                //} else if (filtro.getSelectedIndex() == 4) {}
 
                 }
-
-            
             } 
         });
 
