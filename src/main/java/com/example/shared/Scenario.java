@@ -103,5 +103,11 @@ public class Scenario implements ScenarioGenerale, Serializable, Comparable<Scen
         scenario.getProseguimento().forEach((key, value) -> printStory(value));
     }
 
-    public static native void console(String text);
+
+
+    public static native void console(String text)
+    /*-{
+        console.log(text);
+    }-*/;
+
 }

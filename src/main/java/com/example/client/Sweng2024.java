@@ -53,7 +53,7 @@ public class Sweng2024 implements EntryPoint {
   } 
   private void showPagaPage() {
     RootPanel.get().clear();
-    PagaPage pagaPage = new PagaPage();
+    PagaPage pagaPage = new PagaPage(this);
     RootPanel.get().add(pagaPage);
   }
   private void showScriviPage() {

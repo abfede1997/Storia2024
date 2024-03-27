@@ -21,7 +21,7 @@ public class PagaPage extends Composite {
     private VerticalPanel vhPanel = new VerticalPanel();
     private VerticalPanel vPanel = new VerticalPanel();
  
-    public PagaPage() {
+    public PagaPage(Sweng2024 app) {
         Label titolo = new Label("Effettua il pagamento per poter giocare.");
         titolo.addStyleName("payTitle");
         // Creazione di 5 campi di testo per inserire i valori
@@ -75,6 +75,7 @@ public class PagaPage extends Composite {
                             if (response.getStatusCode() == 200) {
                                 // Transazione completata con successo
                                 Window.alert("Transazione completata con successo!");
+                                app.goToHomePage();
                             } else {
                                 // Errore durante la transazione
                                 Window.alert("Errore durante la transazione. Riprova più tardi.");

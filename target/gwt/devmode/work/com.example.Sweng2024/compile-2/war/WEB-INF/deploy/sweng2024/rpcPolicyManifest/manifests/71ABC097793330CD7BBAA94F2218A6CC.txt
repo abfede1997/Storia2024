@@ -1,0 +1,2 @@
+serviceClass: com.example.client.services.RegisterService
+path: CD96731BDE76373BD4F2FAECDE1DB7D0.gwt.rpc
