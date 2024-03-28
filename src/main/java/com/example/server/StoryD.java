@@ -15,6 +15,7 @@ public interface StoryD {
     public List<Story> getAllStoriesByCategoria(String categoria);
 
     public List<Story> getAllStoriesByAutore(String autore);
-  
+
+    boolean removeStoryByName(Story story);
 
 }

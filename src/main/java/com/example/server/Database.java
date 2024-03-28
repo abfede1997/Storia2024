@@ -102,4 +102,18 @@ public class Database {
         fileDB = null;
         return tmp;
     }
+
+    public boolean removeStoryByName(Story story) {
+        NavigableSet<Story> stories = fileDB.treeSet("story", Story.class).createOrOpen();
+        stories.remove(story);
+        if(!stories.contains(story)){
+            fileDB.commit();
+            fileDB.close();
+            fileDB = null;
+            return true;
+        }
+        fileDB.close();
+        fileDB = null;
+        return false;
+    }
 }

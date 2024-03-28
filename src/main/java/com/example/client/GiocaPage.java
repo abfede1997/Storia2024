@@ -56,10 +56,12 @@ public class GiocaPage extends Composite {
         Label titleLabel = new Label("Pagina di Gioca Storia");
         ListBox storiesList = new ListBox();
         Button startStory = new Button("Play!");
+        Button removeStory = new Button("Remove Story");
 
         vPanel.add(titleLabel);
         vPanel.add(storiesList);
         vPanel.add(startStory);
+        vPanel.add(removeStory);
         vPanel.add(mainStoryPanel);
 
         mainStoryPanel.setVisible(false);
@@ -106,7 +108,47 @@ public class GiocaPage extends Composite {
             }
         });
 
+        removeStory.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                if(!playStories.isEmpty() && storiesList.getItemCount() > 0) {
+                    Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
+                    story.ifPresent(value -> chosenStory = value);
 
+                    getStoriesAsync.removeStoryByName(chosenStory, new AsyncCallback<Boolean>() {
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Window.alert("error");
+                        }
+                        @Override
+                        public void onSuccess(Boolean aBoolean) {
+                            if(aBoolean){
+                                Window.alert("Storia rimossa con successo!");
+
+                                storiesList.clear();
+                                getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
+                                    @Override
+                                    public void onFailure(Throwable throwable) {
+                                        Window.alert("error");
+                                    }
+
+                                    @Override
+                                    public void onSuccess(List<Story> stories) {
+                                        playStories = stories;
+                                        playStories.forEach(s -> {
+                                            storiesList.addItem(s.getNome());
+                                        });
+
+                                    }
+                                });
+                            } else {
+                                Window.alert("La storia non è stata rimossa");
+                            }
+                        }
+                    });
+                }
+            }
+        });
 
 
 

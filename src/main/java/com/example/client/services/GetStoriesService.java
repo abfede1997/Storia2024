@@ -12,5 +12,7 @@ public interface GetStoriesService extends RemoteService {
     Story getStoryByName(String name);
     List<Story> getAllStoriesByCategoria(String categoria);
     List<Story> getAllStoriesByAutore(String autore);
+
+    boolean removeStoryByName(Story story);
     
 }

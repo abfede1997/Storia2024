@@ -25,6 +25,10 @@ public class GetStoriesServiceImpl extends RemoteServiceServlet implements GetSt
     public List<Story> getAllStoriesByAutore(String autore){
         return storyDAO.getAllStoriesByAutore(autore);
     }
-    
+
+    @Override
+    public boolean removeStoryByName(Story story) {
+        return storyDAO.removeStoryByName(story);
+    }
 
 }

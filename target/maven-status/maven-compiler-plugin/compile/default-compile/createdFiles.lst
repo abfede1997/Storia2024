@@ -3,6 +3,7 @@ com\example\client\services\RegisterServiceAsync.class
 com\example\server\Database.class
 com\example\client\HomePage$2.class
 com\example\client\ScriviPage$1$1$1.class
+com\example\client\GiocaPage$7.class
 com\example\server\LoginServiceImpl.class
 com\example\client\PagaPage$1.class
 com\example\client\PagaPage.class
@@ -60,6 +61,8 @@ com\example\client\services\RegisterService.class
 com\example\client\CercaPage$1$1.class
 com\example\client\services\LoginService.class
 com\example\client\ScriviPage$1$1.class
+com\example\client\GiocaPage$3$1$1.class
+com\example\client\GiocaPage$3$1.class
 com\example\client\CercaPage$1$4.class
 com\example\client\Login$1.class
 com\example\client\HomePage$3.class

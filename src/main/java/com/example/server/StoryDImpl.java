@@ -57,4 +57,9 @@ public class StoryDImpl implements StoryD {
         return storieAutore;
     }
 
+    @Override
+    public boolean removeStoryByName(Story story) {
+        return Database.getInstance().removeStoryByName(story);
+    }
+
 }
