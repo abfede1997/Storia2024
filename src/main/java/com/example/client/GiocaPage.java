@@ -56,12 +56,12 @@ public class GiocaPage extends Composite {
         Label titleLabel = new Label("Pagina di Gioca Storia");
         ListBox storiesList = new ListBox();
         Button startStory = new Button("Play!");
-        Button removeStory = new Button("Remove Story");
+        //Button removeStory = new Button("Remove Story");
 
         vPanel.add(titleLabel);
         vPanel.add(storiesList);
         vPanel.add(startStory);
-        vPanel.add(removeStory);
+        //vPanel.add(removeStory);
         vPanel.add(mainStoryPanel);
 
         mainStoryPanel.setVisible(false);
@@ -108,7 +108,7 @@ public class GiocaPage extends Composite {
             }
         });
 
-        removeStory.addClickHandler(new ClickHandler() {
+/*         removeStory.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 if(!playStories.isEmpty() && storiesList.getItemCount() > 0) {
@@ -148,7 +148,7 @@ public class GiocaPage extends Composite {
                     });
                 }
             }
-        });
+        }); */
 
 
 
