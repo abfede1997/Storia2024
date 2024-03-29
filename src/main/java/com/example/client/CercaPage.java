@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -26,6 +27,7 @@ public class CercaPage extends Composite {
     
  
     private VerticalPanel mainPanel = new VerticalPanel();
+    private Grid searchPanel = new Grid(3,3);
     private FlexTable resultsTable = new FlexTable();
     
  
@@ -39,31 +41,42 @@ public class CercaPage extends Composite {
         mainPanel.add(titleLabel);
  
         // Pannello di ricerca
-        HorizontalPanel searchPanel = new HorizontalPanel();
+        searchPanel.addStyleName("PannelloDiRicerca");
+
+        // Area di inserimento ricerca 
+        Label titleSearch = new Label("Inserisci la ricerca:");
+        titleSearch.addStyleName("inserimentoTitle");
         final TextBox searchBox = new TextBox();
+        searchBox.addStyleName("inserimentoBox");
 
         //Menu a tendina per i filtri
+        Label titleFilter = new Label("Seleziona filtro");
+        titleFilter.addStyleName("filterTitle");
         ListBox filtro = new ListBox();
         filtro.addItem("Nessun Filtro");
         filtro.addItem("Nome Storia");
         filtro.addItem("Categoria");
         filtro.addItem("Autore");
+        filtro.addStyleName("filter");
         //filtro.addItem("Lunghezza Storia");
 
         //bottone di ricerca
         Button searchButton = new Button("Cerca");
         searchButton.addStyleName("searchButton");
 
-        //lista di ricerca 
+        //lista di ricerca risultato
         HorizontalPanel listPanel = new HorizontalPanel();
         ListBox storiesList = new ListBox();
         listPanel.add(storiesList);
+        storiesList.addStyleName("listaDiRicerca");
 
-
+        // Aggiungi i componenti alla griglia
+        searchPanel.setWidget(0, 0, titleSearch);
+        searchPanel.setWidget(1, 0, searchBox);
+        searchPanel.setWidget(0, 1, titleFilter);
+        searchPanel.setWidget(1, 1, filtro);
+        searchPanel.setWidget(1, 2, searchButton);
         
-        searchPanel.add(searchBox);
-        searchPanel.add(filtro);
-        searchPanel.add(searchButton);
         mainPanel.add(searchPanel);
         mainPanel.add(listPanel);
 
@@ -77,6 +90,7 @@ public class CercaPage extends Composite {
         resultsTable.setStyleName("resultsTable");
 
         VerticalPanel pRisultato = new VerticalPanel();
+        pRisultato.addStyleName("risultato");
 
         // Metodo bottone di ricerca 
         searchButton.addClickHandler(new ClickHandler() {
@@ -198,4 +212,3 @@ public class CercaPage extends Composite {
         
     }
 }
-

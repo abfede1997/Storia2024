@@ -5,8 +5,9 @@
 
 body {
   height: 100vh;
-  background-color:rgb(87, 201, 199);
-
+  background-image: url("sfondoPagine.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -15,7 +16,6 @@ body {
 .signupContainer {
   height: 100vh;
   width: 100vw;
-  background-image: url("sfondo.jpeg");
 }
 
 .signupSection {
@@ -101,7 +101,6 @@ body {
 .loginContainer {
   height: 100vh;
   width: 100vw;
-  background-image: url("sfondo.jpeg");
 }
 
 .loginSection {
@@ -128,7 +127,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-image: url("sfondo1.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -149,7 +147,6 @@ body {
 .payArea {
   height: 100vh;
   width: 100vw;
-  background-image: url("pay.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -174,4 +171,27 @@ body {
   background-color: lightsalmon;
   cursor: pointer;
   align-self: center;
+}
+
+
+/*Pagina di ricerca*/
+.ricercaTitle{
+  text-transform: uppercase;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  align-self: center;
+}
+
+.PannelloDiRicerca{
+  gap: 10px; /* Spazio tra le celle */
+}
+
+.risultato{
+  margin-left: 20px;
+}
+
+.listaDiRicerca{
+  font-size: 30px;
 }
