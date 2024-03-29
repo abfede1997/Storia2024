@@ -2,9 +2,14 @@ package com.example.client;
 
 import com.example.client.services.GetStoriesService;
 import com.example.client.services.GetStoriesServiceAsync;
+import com.example.client.services.LoginService;
+import com.example.client.services.LoginServiceAsync;
 import com.example.shared.Scenario;
 import com.example.shared.Story;
+import com.example.shared.User;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -17,11 +22,13 @@ import java.util.Optional;
 
 public class GiocaPage extends Composite {
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
+    private LoginServiceAsync loginService = GWT.create(LoginService.class);
 
     private List<Story> playStories;
     private Story chosenStory;
     private Scenario currentScenario;
     private List<String> oggettiRaccolti;
+    private String loggedUser;
 
     private VerticalPanel vPanel = new VerticalPanel();
     private VerticalPanel mainStoryPanel = new VerticalPanel();
@@ -56,31 +63,63 @@ public class GiocaPage extends Composite {
         Label titleLabel = new Label("Pagina di Gioca Storia");
         ListBox storiesList = new ListBox();
         Button startStory = new Button("Play!");
-        //Button removeStory = new Button("Remove Story");
+        Button removeStory = new Button("Remove Story");
 
         vPanel.add(titleLabel);
         vPanel.add(storiesList);
         vPanel.add(startStory);
-        //vPanel.add(removeStory);
         vPanel.add(mainStoryPanel);
 
         mainStoryPanel.setVisible(false);
 
-        getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
+
+
+        storiesList.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent changeEvent) {
+                Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
+                if(story.isPresent() && story.get().getAutore().equals(loggedUser)) {
+                    vPanel.add(removeStory);
+                } else {
+                    vPanel.remove(removeStory);
+                }
+            }
+        });
+
+        loginService.getUserLogged(new AsyncCallback<User>() {
             @Override
             public void onFailure(Throwable throwable) {
                 Window.alert("error");
             }
 
             @Override
-            public void onSuccess(List<Story> stories) {
-                playStories = stories;
-                playStories.forEach(s -> {
-                    storiesList.addItem(s.getNome());
-                });
+            public void onSuccess(User user) {
+                loggedUser = user.getUsername();
 
+                getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Window.alert("error 2");
+                    }
+
+                    @Override
+                    public void onSuccess(List<Story> stories) {
+                        playStories = stories;
+                        playStories.forEach(s -> {
+                            storiesList.addItem(s.getNome());
+                        });
+
+                        Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
+                        if(story.isPresent() && story.get().getAutore().equals(loggedUser)) {
+                            vPanel.add(removeStory);
+                        } else {
+                            vPanel.remove(removeStory);
+                        }
+                    }
+                });
             }
         });
+
 
         startStory.addClickHandler(new ClickHandler() {
             @Override
@@ -108,7 +147,7 @@ public class GiocaPage extends Composite {
             }
         });
 
-/*         removeStory.addClickHandler(new ClickHandler() {
+        removeStory.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent clickEvent) {
                 if(!playStories.isEmpty() && storiesList.getItemCount() > 0) {
@@ -148,7 +187,7 @@ public class GiocaPage extends Composite {
                     });
                 }
             }
-        }); */
+        });
 
 
 
