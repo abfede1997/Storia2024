@@ -18,10 +18,13 @@ import com.google.gwt.json.client.JSONObject;
  
 public class PagaPage extends Composite { 
 
+    private NavigationBar navBar = new NavigationBar();
     private VerticalPanel vhPanel = new VerticalPanel();
     private VerticalPanel vPanel = new VerticalPanel();
  
     public PagaPage(Sweng2024 app) {
+
+        vPanel.add(navBar);
         Label titolo = new Label("Effettua il pagamento per poter giocare.");
         titolo.addStyleName("payTitle");
         // Creazione di 5 campi di testo per inserire i valori

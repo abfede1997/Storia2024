@@ -87,6 +87,8 @@ public class Login extends Composite {
             }
         });
 
+    
+
         vPanel2.add(vPanel2a);
 
 
@@ -96,5 +98,6 @@ public class Login extends Composite {
         initWidget(this.hPanel);
 
     }
+
     
 }

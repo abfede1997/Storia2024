@@ -23,6 +23,7 @@ import java.util.Map;
 
 public class ScriviPage extends Composite {
 
+    private NavigationBar navBar = new NavigationBar();
     private VerticalPanel vPanel = new VerticalPanel();
     @SuppressWarnings("unused")
     private CellTable<Scenario> table = new CellTable<Scenario>();
@@ -34,6 +35,7 @@ public class ScriviPage extends Composite {
     public ScriviPage() {
         initWidget(this.vPanel);
 
+        vPanel.add(navBar);
         // Aggiungi i componenti della pagina di ricerca
         Label titleLabel = new Label("Pagina di Scrivi Storia");
         vPanel.add(titleLabel);

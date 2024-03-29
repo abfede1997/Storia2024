@@ -11,8 +11,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class HomePage extends Composite {
 
     VerticalPanel vPanel = new VerticalPanel();
+    private NavigationBar navBar = new NavigationBar();
 
     public HomePage() {
+
+        vPanel.add(navBar);
+
         this.vPanel.addStyleName("wrapper");
 
         Button scriviButton = new Button("Scrivi Storia");

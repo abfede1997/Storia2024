@@ -3,6 +3,7 @@ com/example/client/services/RegisterService.class
 com/example/client/GiocaPage$2.class
 com/example/client/HomePage$2.class
 com/example/client/DynamicSelectionCell.class
+com/example/client/NavigationBar$2.class
 com/example/client/Login$2.class
 com/example/client/services/LoginService.class
 com/example/client/GiocaPage$4$1.class
@@ -25,10 +26,12 @@ com/example/client/SignUp$1.class
 com/example/client/Login$2$1.class
 com/example/client/GiocaPage$8.class
 com/example/client/PagaPage.class
+com/example/client/NavigationBar$1.class
 com/example/client/ScriviPage$1$1$1$1.class
 com/example/client/ScriviPage$1$2.class
 com/example/client/services/RegisterServiceAsync.class
 com/example/client/HomePage$3.class
+com/example/client/NavigationBar.class
 com/example/client/SignUp.class
 com/example/client/SignUp$2$1.class
 com/example/client/GiocaPage$4$1$1.class
@@ -62,6 +65,7 @@ com/example/server/UserDImpl.class
 com/example/client/ScriviPage.class
 com/example/client/DynamicSelectionCell$Template.class
 com/example/server/GetStoriesServiceImpl.class
+com/example/client/NavigationBar$3.class
 com/example/server/AddStoryServiceImpl.class
 com/example/client/ScriviPage$1$3.class
 com/example/client/CercaPage$1$3.class

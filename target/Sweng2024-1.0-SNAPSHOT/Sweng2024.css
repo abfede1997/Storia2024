@@ -195,3 +195,31 @@ body {
 .listaDiRicerca{
   font-size: 30px;
 }
+
+/*Navigation Bar*/
+.navbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333; /* Colore di sfondo della navbar */
+  padding: 10px 20px; /* Spaziatura interna */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra */
+  z-index: 1000; /* Assicura che la navbar sia sopra gli altri elementi */
+}
+
+.navButton {
+  margin-right: 5px; /* Spazio tra i pulsanti */
+  border: none;
+  padding: 8px; 
+  font-size: 14px; 
+  cursor: pointer; 
+}
+
+.logoutButton{
+  margin-left: auto;
+  border: none;
+  padding: 8px; 
+  font-size: 14px; 
+  cursor: pointer; 
+}

@@ -20,7 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 public class GiocaPage extends Composite {
+
+    private NavigationBar navBar = new NavigationBar();
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
     private LoginServiceAsync loginService = GWT.create(LoginService.class);
 
@@ -38,6 +41,8 @@ public class GiocaPage extends Composite {
 
     public GiocaPage() {
         initWidget(this.vPanel);
+
+        vPanel.add(navBar);
 
         this.oggettiRaccolti = new ArrayList<>();
 

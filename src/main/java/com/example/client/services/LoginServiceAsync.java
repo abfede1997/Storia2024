@@ -10,4 +10,6 @@ public interface LoginServiceAsync {
     void setUserLogged(User user, AsyncCallback<Boolean> async);
 
     void getUserLogged(AsyncCallback<User> async);
+
+    void logout(AsyncCallback<Void> callback);
 }

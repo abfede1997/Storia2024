@@ -23,6 +23,11 @@ public class Sweng2024 implements EntryPoint {
     // Quando si desidera andare alla pagina principale, aggiorna la cronologia
     History.newItem("home");
   }
+
+  public void goToLoginPage(){
+    History.newItem("loginPage");
+  }
+
   public void showLoginPage() {
     RootPanel.get().clear();
     Login loginPage = new Login(this);
