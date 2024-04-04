@@ -2,14 +2,15 @@ package com.example.server;
 
 //import org
 
+import com.example.client.Pair;
+import com.example.shared.Scenario;
 import com.example.shared.Story;
 import com.example.shared.User;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
+import org.mapdb.HTreeMap;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NavigableSet;
+import java.util.*;
 
 public class Database {
 
@@ -28,7 +29,10 @@ public class Database {
 
 
     public NavigableSet<User> getUsersSet() {
-        return fileDB.treeSet("users", User.class).createOrOpen();
+        NavigableSet<User> users = fileDB.treeSet("users", User.class).createOrOpen();
+        fileDB.close();
+        fileDB = null;
+        return users;
     }
 
     public List<Story> getStories() {
@@ -115,5 +119,96 @@ public class Database {
         fileDB.close();
         fileDB = null;
         return false;
+    }
+
+    public boolean modifyStoryByName(Story story) {
+        NavigableSet<Story> stories = fileDB.treeSet("story", Story.class).createOrOpen();
+        Iterator<Story> it = stories.iterator();
+
+
+        while(it.hasNext()) {
+            Story tmp = it.next();
+            if(tmp.getNome().equals(story.getNome())){
+                tmp = story;
+                fileDB.commit();
+                fileDB.close();
+                fileDB = null;
+                return true;
+            }
+        }
+
+        fileDB.close();
+        fileDB = null;
+        return false;
+    }
+
+    public boolean saveCurrentStory(String username, Story story, Scenario currentScenario) {
+        HTreeMap<Scenario, Pair> savedScenariosStory = fileDB.hashMap("savedScenariosStory", Scenario.class, Pair.class).createOrOpen();
+
+        boolean storyExists = false;
+        Scenario scenarioTmp = null;
+        String usernameTmp;
+        Story storyTmp;
+
+
+        Iterator<Map.Entry<Scenario, Pair>> it = savedScenariosStory.getEntries().iterator();
+        while(it.hasNext()){
+            Map.Entry<Scenario, Pair> tmp = it.next();
+
+            scenarioTmp = tmp.getKey();
+            usernameTmp = (String) tmp.getValue().getA();
+            storyTmp = (Story) tmp.getValue().getB();
+
+            if(usernameTmp.equals(username) && storyTmp.getNome().equals(story.getNome())){
+                storyExists = true;
+                break;
+            }
+        }
+
+        if(storyExists) {
+            savedScenariosStory.remove(scenarioTmp);
+        }
+        savedScenariosStory.put(currentScenario, new Pair<>(username, story));
+
+        if(savedScenariosStory.containsKey(currentScenario) && savedScenariosStory.containsValue(new Pair<>(username, story))){
+            fileDB.commit();
+            fileDB.close();
+            fileDB = null;
+            return true;
+        } else {
+            fileDB.close();
+            fileDB = null;
+            return false;
+        }
+    }
+
+    public Pair<Scenario, Story> loadCurrentStory(String username, Story story) {
+        HTreeMap<Scenario, Pair> savedScenariosStory = fileDB.hashMap("savedScenariosStory", Scenario.class, Pair.class).createOrOpen();
+
+        Pair<Scenario, Story> toReturn;
+
+        Scenario scenarioTmp = null;
+        String usernameTmp;
+        Story storyTmp = null;
+
+        Iterator<Map.Entry<Scenario, Pair>> it = savedScenariosStory.getEntries().iterator();
+        while(it.hasNext()){
+            Map.Entry<Scenario, Pair> tmp = it.next();
+
+            scenarioTmp = tmp.getKey();
+            usernameTmp = (String) tmp.getValue().getA();
+            storyTmp = (Story) tmp.getValue().getB();
+
+            if(usernameTmp.equals(username) && storyTmp.getNome().equals(story.getNome())){
+                break;
+            }
+        }
+
+        toReturn = new Pair<>(scenarioTmp, storyTmp);
+
+        fileDB.close();
+        fileDB = null;
+
+        return toReturn;
     }
 }

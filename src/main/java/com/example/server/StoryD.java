@@ -1,5 +1,7 @@
 package com.example.server;
 
+import com.example.client.Pair;
+import com.example.shared.Scenario;
 import com.example.shared.Story;
 
 import java.util.List;
@@ -17,5 +19,11 @@ public interface StoryD {
     public List<Story> getAllStoriesByAutore(String autore);
 
     boolean removeStoryByName(Story story);
+
+    boolean modifyStoryByName(Story story);
+
+    boolean saveCurrentStory(String username, Story story, Scenario currentScenario);
+
+    Pair<Scenario, Story> loadCurrentStory(String username, Story story);
 
 }

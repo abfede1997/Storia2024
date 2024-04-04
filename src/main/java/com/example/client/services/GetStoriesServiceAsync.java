@@ -1,5 +1,7 @@
 package com.example.client.services;
 
+import com.example.client.Pair;
+import com.example.shared.Scenario;
 import com.example.shared.Story;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -12,4 +14,10 @@ public interface GetStoriesServiceAsync {
     void getAllStoriesByAutore(String autore, AsyncCallback<List<Story>> callback);
 
     void removeStoryByName(Story story, AsyncCallback<Boolean> async);
+
+    void modifyStoryByName(Story story, AsyncCallback<Boolean> async);
+
+    void saveCurrentStory(String username, Story story, Scenario currentScenario, AsyncCallback<Boolean> async);
+
+    void loadCurrentStory(String username, Story story, AsyncCallback<Pair<Scenario, Story>> async);
 }

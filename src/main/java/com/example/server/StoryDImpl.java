@@ -1,5 +1,7 @@
 package com.example.server;
 
+import com.example.client.Pair;
+import com.example.shared.Scenario;
 import com.example.shared.Story;
 
 import java.util.ArrayList;
@@ -60,6 +62,21 @@ public class StoryDImpl implements StoryD {
     @Override
     public boolean removeStoryByName(Story story) {
         return Database.getInstance().removeStoryByName(story);
+    }
+
+    @Override
+    public boolean modifyStoryByName(Story story) {
+        return Database.getInstance().modifyStoryByName(story);
+    }
+
+    @Override
+    public boolean saveCurrentStory(String username, Story story, Scenario currentScenario) {
+        return Database.getInstance().saveCurrentStory(username, story, currentScenario);
+    }
+
+    @Override
+    public Pair<Scenario, Story> loadCurrentStory(String username, Story story) {
+        return Database.getInstance().loadCurrentStory(username, story);
     }
 
 }

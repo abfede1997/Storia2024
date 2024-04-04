@@ -16,14 +16,9 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
 
 public class GiocaPage extends Composite {
-
-    private NavigationBar navBar = new NavigationBar();
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
     private LoginServiceAsync loginService = GWT.create(LoginService.class);
 
@@ -32,17 +27,19 @@ public class GiocaPage extends Composite {
     private Scenario currentScenario;
     private List<String> oggettiRaccolti;
     private String loggedUser;
+    private Map<Integer, TextBox> descChanges = new HashMap<>();
+    private Map<Integer, TextBox> actionChanges = new HashMap<>();
+
 
     private VerticalPanel vPanel = new VerticalPanel();
     private VerticalPanel mainStoryPanel = new VerticalPanel();
     private HorizontalPanel descriptionPanel = new HorizontalPanel();
     private HorizontalPanel buttonsPanel = new HorizontalPanel();
+    private VerticalPanel horPanelColumns = new VerticalPanel();
 
 
     public GiocaPage() {
         initWidget(this.vPanel);
-
-        vPanel.add(navBar);
 
         this.oggettiRaccolti = new ArrayList<>();
 
@@ -67,15 +64,30 @@ public class GiocaPage extends Composite {
         // Aggiungi i componenti della pagina di ricerca
         Label titleLabel = new Label("Pagina di Gioca Storia");
         ListBox storiesList = new ListBox();
+
         Button startStory = new Button("Play!");
-        Button removeStory = new Button("Remove Story");
+
+        Button removeStory = new Button("Rimuovi Storia");
+        removeStory.setVisible(false);
+
+        Button modifyStory = new Button("Modifica Storia");
+        modifyStory.setVisible(false);
+
+        Button saveScenario = new Button("Salva Storia Corrente");
+        saveScenario.setVisible(false);
+
+        Button loadScenario = new Button("Carica Storia Salvata");
+        loadScenario.setVisible(false);
 
         vPanel.add(titleLabel);
         vPanel.add(storiesList);
         vPanel.add(startStory);
-        vPanel.add(mainStoryPanel);
+        vPanel.add(removeStory);
+        vPanel.add(modifyStory);
 
         mainStoryPanel.setVisible(false);
+
+
 
 
 
@@ -84,10 +96,60 @@ public class GiocaPage extends Composite {
             public void onChange(ChangeEvent changeEvent) {
                 Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
                 if(story.isPresent() && story.get().getAutore().equals(loggedUser)) {
-                    vPanel.add(removeStory);
+                    removeStory.setVisible(true);
+                    modifyStory.setVisible(true);
                 } else {
-                    vPanel.remove(removeStory);
+                    removeStory.setVisible(false);
+                    modifyStory.setVisible(false);
                 }
+            }
+        });
+
+        saveScenario.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                getStoriesAsync.saveCurrentStory(loggedUser, chosenStory, currentScenario, new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Window.alert("Errore! Storia non salvata");
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean aBoolean) {
+                        Window.alert("Storia salvata con successo!");
+                    }
+                });
+            }
+        });
+
+        loadScenario.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                getStoriesAsync.loadCurrentStory(loggedUser, chosenStory, new AsyncCallback<Pair<Scenario, Story>>() {
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        Window.alert("error");
+                    }
+
+                    @Override
+                    public void onSuccess(Pair<Scenario, Story> scenarioStoryPair) {
+                        if(scenarioStoryPair.getA() == null || scenarioStoryPair.getB() == null){
+                            Window.alert("Nessun scenario salvato!");
+                        } else {
+                            horPanelColumns.clear();
+                            actions.clear();
+                            buttonsPanel.clear();
+                            oggettiRaccolti.clear();
+                            chosenStory.getInventario().clear();
+
+                            chosenStory = scenarioStoryPair.getB();
+                            currentScenario = scenarioStoryPair.getA();
+                            oggettiRaccolti.addAll(chosenStory.getInventario());
+
+                            constructCurrentScenario(currentScenario, scenarioDescription, actions);
+                        }
+                    }
+                });
             }
         });
 
@@ -116,9 +178,11 @@ public class GiocaPage extends Composite {
 
                         Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
                         if(story.isPresent() && story.get().getAutore().equals(loggedUser)) {
-                            vPanel.add(removeStory);
+                            removeStory.setVisible(true);
+                            modifyStory.setVisible(true);
                         } else {
-                            vPanel.remove(removeStory);
+                            modifyStory.setVisible(false);
+                            removeStory.setVisible(false);
                         }
                     }
                 });
@@ -133,6 +197,7 @@ public class GiocaPage extends Composite {
                     Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
                     story.ifPresent(value -> chosenStory = value);
 
+                    horPanelColumns.clear();
                     actions.clear();
                     buttonsPanel.clear();
                     oggettiRaccolti.clear();
@@ -148,6 +213,8 @@ public class GiocaPage extends Composite {
                     constructCurrentScenario(currentScenario, scenarioDescription, actions);
 
                     mainStoryPanel.setVisible(true);
+                    saveScenario.setVisible(true);
+                    loadScenario.setVisible(true);
                 }
             }
         });
@@ -158,6 +225,10 @@ public class GiocaPage extends Composite {
                 if(!playStories.isEmpty() && storiesList.getItemCount() > 0) {
                     Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
                     story.ifPresent(value -> chosenStory = value);
+                    horPanelColumns.clear();
+                    mainStoryPanel.setVisible(false);
+                    saveScenario.setVisible(false);
+                    loadScenario.setVisible(false);
 
                     getStoriesAsync.removeStoryByName(chosenStory, new AsyncCallback<Boolean>() {
                         @Override
@@ -168,6 +239,7 @@ public class GiocaPage extends Composite {
                         public void onSuccess(Boolean aBoolean) {
                             if(aBoolean){
                                 Window.alert("Storia rimossa con successo!");
+
 
                                 storiesList.clear();
                                 getStoriesAsync.getStories(new AsyncCallback<List<Story>>() {
@@ -194,13 +266,117 @@ public class GiocaPage extends Composite {
             }
         });
 
+        modifyStory.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent clickEvent) {
+                if(!playStories.isEmpty() && storiesList.getItemCount() > 0) {
+                    Optional<Story> story = playStories.stream().filter(s -> s.getNome().equals(storiesList.getSelectedItemText())).findAny();
+                    story.ifPresent(value -> chosenStory = value);
+
+                    horPanelColumns.clear();
+                    mainStoryPanel.setVisible(false);
+                    saveScenario.setVisible(false);
+                    loadScenario.setVisible(false);
+                    descChanges.clear();
+                    actionChanges.clear();
+
+                    HorizontalPanel labelsPanels = new HorizontalPanel();
+
+                    Label idColumn = new Label("ID");
+                    Label descColumn = new Label("Descrizione");
+                    Label azioneColumn = new Label("Azione");
+
+                    labelsPanels.add(idColumn);
+                    labelsPanels.add(descColumn);
+                    labelsPanels.add(azioneColumn);
+
+                    horPanelColumns.add(labelsPanels);
+
+                    modifyScenario(chosenStory.getInizio(), horPanelColumns);
+
+                    Button saveChanges = new Button("Save Changes");
+                    horPanelColumns.add(saveChanges);
+
+                    saveChanges.addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent clickEvent) {
+                            assignChanges(chosenStory.getInizio());
+
+                            getStoriesAsync.modifyStoryByName(chosenStory, new AsyncCallback<Boolean>() {
+                                @Override
+                                public void onFailure(Throwable throwable) {
+                                    Window.alert("La storia non è stata aggiornata");
+                                }
+
+                                @Override
+                                public void onSuccess(Boolean aBoolean) {
+                                    Window.alert("Storia aggiornata con successo!");
+                                    horPanelColumns.clear();
+                                    mainStoryPanel.setVisible(false);
+                                    saveScenario.setVisible(false);
+                                    loadScenario.setVisible(false);
+                                    descChanges.clear();
+                                    actionChanges.clear();
+                                }
+                            });
+                        }
+                    });
+
+                    vPanel.add(horPanelColumns);
 
 
+
+                }
+            }
+        });
+
+
+
+        vPanel.add(mainStoryPanel);
+        vPanel.add(saveScenario);
+        vPanel.add(loadScenario);
 
     }
 
+    private void modifyScenario(Scenario scenario, VerticalPanel vPanel) {
+
+        HorizontalPanel horPanel = new HorizontalPanel();
+
+        Label id = new Label(String.valueOf(scenario.getId()));
+
+        TextBox desc = new TextBox();
+        desc.setText(scenario.getDescrizione());
+        descChanges.put(scenario.getId(), desc);
+
+        TextBox azione = new TextBox();
+        azione.setText(scenario.getAzione());
+        actionChanges.put(scenario.getId(),azione);
+
+        horPanel.add(id);
+        horPanel.add(desc);
+        horPanel.add(azione);
+
+        vPanel.add(horPanel);
+
+        if(!scenario.getProseguimento().isEmpty()) {
+            scenario.getProseguimento().forEach((t, s) -> modifyScenario(s, vPanel));
+        }
+
+    }
+
+    private void assignChanges(Scenario scenario) {
+        scenario.setDescrizione(descChanges.get(scenario.getId()).getText());
+        scenario.setAzione(actionChanges.get(scenario.getId()).getText());
+
+        if(!scenario.getProseguimento().isEmpty()){
+            scenario.getProseguimento().forEach((id, s) -> assignChanges(s));
+        }
+    }
+
+
     private void constructCurrentScenario(Scenario currentScenario, Label scenarioDescription, List<Button> actions) {
         scenarioDescription.setText(currentScenario.getDescrizione());
+        this.currentScenario = currentScenario;
 
         if(currentScenario.getIndovinello().isEmpty()) {
 
