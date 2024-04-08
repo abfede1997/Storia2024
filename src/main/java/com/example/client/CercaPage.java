@@ -22,7 +22,6 @@ import com.example.client.services.GetStoriesServiceAsync;
 import com.example.shared.Story;
  
 public class CercaPage extends Composite {
-    private NavigationBar navBar = new NavigationBar();
     private List<Story> watchStories;
     private GetStoriesServiceAsync getStoriesAsync = GWT.create(GetStoriesService.class);
     
@@ -35,8 +34,6 @@ public class CercaPage extends Composite {
     public CercaPage() {
 
         initWidget(mainPanel);
-
-        mainPanel.add(navBar);
  
         // Titolo della pagina
         Label titleLabel = new Label("Catalogo di Storie");

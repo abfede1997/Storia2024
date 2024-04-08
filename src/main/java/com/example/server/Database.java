@@ -42,9 +42,9 @@ public class Database {
         return stories;
     }
 
-    public User checkLogin(String email, String password) {
+    public User checkLogin(String username, String password) {
         NavigableSet<User> userSet = fileDB.treeSet("users", User.class).createOrOpen();
-        User newUser = new User(email, password);
+        User newUser = new User(username, password);
         boolean tmp = userSet.contains(newUser);
         fileDB.close();
         fileDB = null;

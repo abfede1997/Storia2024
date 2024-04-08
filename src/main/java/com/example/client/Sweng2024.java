@@ -53,7 +53,7 @@ public class Sweng2024 implements EntryPoint {
   }
   private void showHomePage() {
     RootPanel.get().clear();
-    HomePage home = new HomePage();
+    HomePage home = new HomePage(this);
     RootPanel.get().add(home);
   } 
   private void showPagaPage() {
