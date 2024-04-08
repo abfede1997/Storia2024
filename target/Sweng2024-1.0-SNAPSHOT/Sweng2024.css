@@ -154,13 +154,6 @@ body {
   margin: 20px;
   padding: 30px;
 }
-.payTitle {
-  text-transform: uppercase;
-  font-size: 2em;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 1px;
-}
 .payButton {
   color: black;
   padding: 14px 64px;
@@ -175,15 +168,6 @@ body {
 
 
 /*Pagina di ricerca*/
-.ricercaTitle{
-  text-transform: uppercase;
-  font-size: 2em;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 1px;
-  align-self: center;
-}
-
 .PannelloDiRicerca{
   gap: 10px; /* Spazio tra le celle */
 }
@@ -196,3 +180,13 @@ body {
   font-size: 30px;
 }
 
+
+/*titoli*/
+.titoli{
+  text-transform: uppercase;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  align-self: center;
+}

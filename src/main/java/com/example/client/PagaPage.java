@@ -23,8 +23,8 @@ public class PagaPage extends Composite {
  
     public PagaPage(Sweng2024 app) {
 
-        Label titolo = new Label("Effettua il pagamento per poter giocare.");
-        titolo.addStyleName("payTitle");
+        Label titolo = new Label("Effettua il pagamento per poter giocare");
+        titolo.addStyleName("titoli");
         // Creazione di 5 campi di testo per inserire i valori
         Label amount = new Label("Amount:");
         amount.addStyleName("write");

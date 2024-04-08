@@ -33,11 +33,6 @@ public class ScriviPage extends Composite {
 
     public ScriviPage() {
         initWidget(this.vPanel);
-
-        // Aggiungi i componenti della pagina di ricerca
-        Label titleLabel = new Label("Pagina di Scrivi Storia");
-        vPanel.add(titleLabel);
-
         // Aggiungi altri widget o elementi della tua pagina di ricerca secondo
         // necessità
 

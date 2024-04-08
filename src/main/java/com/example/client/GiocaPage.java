@@ -62,7 +62,8 @@ public class GiocaPage extends Composite {
 
 
         // Aggiungi i componenti della pagina di ricerca
-        Label titleLabel = new Label("Pagina di Gioca Storia");
+        Label titleLabel = new Label("Gioca Storia");
+        titleLabel.addStyleName("titoli");
         ListBox storiesList = new ListBox();
 
         Button startStory = new Button("Play!");

@@ -37,7 +37,7 @@ public class CercaPage extends Composite {
  
         // Titolo della pagina
         Label titleLabel = new Label("Catalogo di Storie");
-        titleLabel.addStyleName("ricercaTitle");
+        titleLabel.addStyleName("titoli");
         mainPanel.add(titleLabel);
  
         // Pannello di ricerca
